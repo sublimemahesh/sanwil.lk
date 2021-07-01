@@ -12,7 +12,9 @@ $sub_products = $PRODUCT->getSubProductsByParent($_GET['id']);
 $CAT = new ProductCategories($PRODUCT->category);
 $discount = ($PRODUCT->price * $PRODUCT->discount) / 100;
 $price = $PRODUCT->price - $discount;
-$related_products = $PRODUCT->getProductsByCategory($PRODUCT->category);
+$related_products = Product::getParentProductsByCategory($PRODUCT->category);
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -32,7 +34,7 @@ $related_products = $PRODUCT->getProductsByCategory($PRODUCT->category);
     <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
     <link rel="shortcut icon" type="image/x-icon" href="images/favicon.png" />
     <!-- PAGE TITLE HERE -->
-    <title>Ceylon Fine Spice | <?php echo $PRODUCT->name; ?> </title>
+    <title>Nutshut | <?php echo $PRODUCT->name; ?> </title>
     <!-- MOBILE SPECIFIC -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- STYLESHEETS -->
@@ -100,7 +102,7 @@ $related_products = $PRODUCT->getProductsByCategory($PRODUCT->category);
                                     <div class="dlab-box">
                                         <?php
                                         $PRODUCT_PHOTO = new ProductPhoto(null);
-                                        foreach ($PRODUCT_PHOTO->getProductPhotosById($PRODUCT->id) as $product_photo) {
+                                        foreach ($PRODUCT_PHOTO->getProductPhotosById($id) as $product_photo) {
                                         ?>
                                             <div class="dlab-thum-bx">
                                                 <img src="upload/product-categories/sub-category/product/photos/gallery/<?php echo $product_photo['image_name'] ?>" alt="image" alt="">
@@ -134,12 +136,12 @@ $related_products = $PRODUCT->getProductsByCategory($PRODUCT->category);
                                                     <div class="col-md-3">
                                                         <span class="price-new"><?= $sub_product['name']; ?></span>
                                                     </div>
-                                                    <div class="col-md-3">
+                                                    <div class="col-md-3 sub_product_list_price">
                                                         <span class="price-new">Rs. <?php echo number_format($price1, 2); ?></span>
                                                         <?php
                                                         if ($discount1 != 0) {
                                                         ?>
-                                                            <span class="price-old">Rs. <?php echo number_format($sub_product['price'], 2); ?></span>
+                                                            <br /><del><span class="price-old">Rs. <?php echo number_format($sub_product['price'], 2); ?></span></del>
                                                         <?php
                                                         }
                                                         ?>
@@ -275,56 +277,56 @@ $related_products = $PRODUCT->getProductsByCategory($PRODUCT->category);
                     <div class="container">
                         <h2 class="title">Related products</h2>
                         <?php
-                         dd($related_products);
+
                         if (count($related_products) > 1) {
                         ?>
                             <div class="products-carousel owl-carousel owl-btn-center-lr owl-btn-3">
                                 <?php
-                                foreach ($related_products as $key => $product) {
-                                    if ($product['id'] != $id) {
-
-
-                                        $sub_r_products = Product::getSubProductsByParent($product['id']);
-                                        dd($sub_r_products);
+                                foreach ($related_products as $key => $rproduct) {
+                                    if ($rproduct['id'] != $id) {
+                                        $sub_r_products = Product::getSubProductsByParent($rproduct['id']);
                                         if (count($sub_r_products) > 0) {
-                                            $min_price = Product::getMinimumPrice($product['id']);
-                                            dd($min_price);
-                                            $discount1 = ($product['price'] * $product['discount']) / 100;
-                                            $price1 = $product['price'] - $discount1;
+                                            $min_price = Product::getMinimumPrice($rproduct['id']);
+                                            $discount1 = ($min_price['price'] * $min_price['discount']) / 100;
+                                            $price1 = $min_price['price'] - $discount1;
+                                            $old_price = $min_price['price'];
                                         } else {
-                                            $discount1 = ($product['price'] * $product['discount']) / 100;
-                                            $price1 = $product['price'] - $discount1;
+                                            $discount1 = ($rproduct['price'] * $rproduct['discount']) / 100;
+                                            $price1 = $rproduct['price'] - $discount1;
+                                            $old_price = $rproduct['price'];
                                         }
                                 ?>
                                         <div class="item">
                                             <div class="item-box shop-item">
                                                 <div class="item-img">
-                                                    <a href="product.php?id=<?php echo $product['id']; ?>"><img src="upload/product-categories/sub-category/product/photos/<?php echo $product['image_name'] ?>" alt=""></a>
+                                                    <a href="product.php?id=<?php echo $rproduct['id']; ?>"><img src="upload/product-categories/sub-category/product/photos/<?php echo $rproduct["image_name"] ?>" alt=""></a>
                                                     <div class="price">
                                                         <span>Rs. <?php echo number_format($price1, 2); ?></span>
                                                         <?php
                                                         if ($discount1 != 0) {
                                                         ?>
-                                                            <del>Rs. <?php echo number_format($product['price'], 2); ?></del>
+                                                            <del>Rs. <?php echo number_format($old_price, 2); ?></del>
                                                         <?php
                                                         }
                                                         ?>
                                                     </div>
                                                 </div>
                                                 <div class="item-info text-center">
-                                                    <h4 class="item-title"><a href="product.php?id=<?php echo $product['id']; ?>"><?php echo $product['name']; ?></a></h4>
+                                                    <h4 class="item-title"><a href="product.php?id=<?php echo $rproduct['id']; ?>"><?php echo $rproduct['name']; ?></a></h4>
 
                                                     <?php
-                                                    if ($product['in_stock'] == 1) {
+                                                    if ($rproduct['in_stock'] == 1) {
                                                     ?>
-                                                        <input type="hidden" id="name<?= $product['id']; ?>" value="<?= $product['name']; ?>" />
-                                                        <input type="hidden" id="price<?= $product['id']; ?>" value="<?= $price1; ?>" />
-                                                        <input type="hidden" id="quantity<?= $product['id']; ?>" value="1" />
-                                                        <div id="<?php echo $product['id']; ?>" min-qty="<?php echo $product['min_qty']; ?>" max-qty="<?php echo $product['max_qty']; ?>" class="add_to_cart btn btnhover"><i class="fa fa-shopping-cart"></i> Add to Cart</div>
+                                                        <input type="hidden" id="name<?= $rproduct['id']; ?>" value="<?= $rproduct['name']; ?>" />
+                                                        <input type="hidden" id="price<?= $rproduct['id']; ?>" value="<?= $price1; ?>" />
+                                                        <input type="hidden" id="quantity<?= $rproduct['id']; ?>" value="1" />
+                                                        <!-- <div id="<?php echo $rproduct['id']; ?>" min-qty="<?php echo $product['min_qty']; ?>" max-qty="<?php echo $rproduct['max_qty']; ?>" class="add_to_cart btn btnhover"><i class="fa fa-shopping-cart"></i> Add to Cart</div> -->
+                                                        <a href="product.php?id=<?php echo $rproduct['id']; ?>" class="btn btnhover radius-xl"><i class="fa fa-eye"></i> View Product</a>
                                                     <?php
                                                     } else {
                                                     ?>
-                                                        <div><i class="fa fa-shopping-cart"></i> Not in Stock</div>
+                                                        <a href="product.php?id=<?php echo $rproduct['id']; ?>" class="btn btnhover radius-xl"><i class="fa fa-eye"></i> View Product</a>
+                                                        <!-- <div><i class="fa fa-shopping-cart"></i> Not in Stock</div> -->
                                                     <?php
                                                     }
                                                     ?>

@@ -15765,3 +15765,8 @@ pre {
     padding-right: 8px;
     padding-top: 10px;
 }
+
+.sub_product_list_price del span {
+    font-size: 12px;
+    opacity  : .5;
+}

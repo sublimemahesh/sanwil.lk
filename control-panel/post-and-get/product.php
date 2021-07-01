@@ -158,9 +158,10 @@ if (isset($_POST['update'])) {
         $PRODUCT->update();
         if ($_POST['product_type'] == 'sub') {
             $no_of_sub_products = $_POST['no_of_sub_products'];
-
+            // dd($no_of_sub_products);
             for ($i = 1; $i <= $no_of_sub_products; $i++) {
                 $pro_id = $_POST["sub_pro_id_$i"];
+                
                 if ($pro_id != '') {
                     if ($_POST["sub_name_$i"] != '' && $_POST["price_$i"] != '') {
                         $PRODUCT1 = new Product($pro_id);
