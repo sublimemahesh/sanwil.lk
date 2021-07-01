@@ -31,7 +31,7 @@ $PRODUCT_CATEGORIES = new ProductCategories($id);
     <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
     <link rel="shortcut icon" type="image/x-icon" href="images/favicon.png" />
     <!-- PAGE TITLE HERE -->
-    <title>Ceylon Fine Spice | <?php echo $PRODUCT_CATEGORIES->name; ?></title>
+    <title>Nutshut | <?php echo $PRODUCT_CATEGORIES->name; ?></title>
     <!-- MOBILE SPECIFIC -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- STYLESHEETS -->
@@ -94,10 +94,19 @@ $PRODUCT_CATEGORIES = new ProductCategories($id);
                             $PRODUCT = new Product(NULL);
                             $PRODUCT = $PRODUCT->getProductsByCategory($id);
                             foreach ($PRODUCT as $key => $product) {
-                                $discount = ($product['price'] * $product['discount']) / 100;
-                                $price = $product['price'] - $discount;
+                                $sub_r_products = Product::getSubProductsByParent($product['id']);
+                                if (count($sub_r_products) > 0) {
+                                    $min_price = Product::getMinimumPrice($product['id']);
+                                    $discount = ($min_price['price'] * $min_price['discount']) / 100;
+                                    $price = $min_price['price'] - $discount;
+                                    $old_price = $min_price['price'];
+                                } else {
+                                    $discount = ($product['price'] * $product['discount']) / 100;
+                                    $price = $product['price'] - $discount;
+                                    $old_price = $product['price'];
+                                }
                             ?>
-                                <div class="dz-col col m-b30">
+                                <div class="dz-col col m-b30 ">
                                     <div class="item-box shop-item style2 product-box-h">
                                         <div class="item-img">
                                             <a href="product.php?id=<?php echo $product['id']; ?>"> <img src="upload/product-categories/sub-category/product/photos/<?php echo $product['image_name'] ?>" alt=""></a>
@@ -106,22 +115,16 @@ $PRODUCT_CATEGORIES = new ProductCategories($id);
                                             <a href="product.php?id=<?php echo $product['id']; ?>">
                                                 <h4 class="item-title"> <?php echo $product['name']; ?></h4>
                                             </a>
-                                            <?php
-                                            if ($product['price'] != 0) {
-                                            ?>
-                                                <div class="price">
-                                                    <span>Rs. <?php echo number_format($price, 2); ?></span>
-                                                    <?php
-                                                    if ($discount != 0) {
-                                                    ?>
-                                                        <del>Rs. <?php echo number_format($product['price'], 2); ?></del>
-                                                    <?php
-                                                    }
-                                                    ?>
-                                                </div>
-                                            <?php
-                                            }
-                                            ?>
+                                            <div class="price">
+                                                <span>Rs. <?php echo number_format($price, 2); ?></span>
+                                                <?php
+                                                if ($discount != 0) {
+                                                ?>
+                                                    <del>Rs. <?php echo number_format($old_price, 2); ?></del>
+                                                <?php
+                                                }
+                                                ?>
+                                            </div>
                                             <?php
                                             if ($product['in_stock'] == 1) {
                                             ?>

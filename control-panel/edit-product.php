@@ -193,9 +193,11 @@ $sub_products = $PRODUCT->getSubProductsByParent($id);
                                 <div class="row col-md-12  <?= $s_hidden; ?>" id="sub-product-section">
                                     <fieldset class="sub-product-section">
                                         <?php
+                                        $no_of_sub_products = 1;
                                         if (count($sub_products) > 0) {
                                             foreach ($sub_products as $key => $sub_product) {
                                                 $key++;
+                                                $no_of_sub_products = $key;
                                         ?>
                                                 <div class="row col-md-12">
                                                     <hr />
@@ -236,14 +238,14 @@ $sub_products = $PRODUCT->getSubProductsByParent($id);
                                                             </div>
                                                         </div>
                                                         <input id="sub_pro_id" name="sub_pro_id_<?= $key; ?>" type="hidden" value="<?= $sub_product['id']; ?>" />
-
+                                                        <!-- <input id="no-of-sub-products" name="no_of_sub_products" type="hidden" value="<?= $key; ?>" /> -->
                                                         <?php
                                                         if ($key == 1) {
                                                         ?>
                                                             <div class="col-md-1">
                                                                 <div class="form-group">
-                                                                    <input id="no-of-sub-products" name="no_of_sub_products" type="hidden" value="<?= $key; ?>" />
-                                                                    <button id="add-row" class="btn btn-primary">Add Row</button>
+
+                                                                    <button id="add-row" type="button" class="btn btn-primary">Add Row</button>
                                                                 </div>
                                                             </div>
                                                     <?php
@@ -278,13 +280,14 @@ $sub_products = $PRODUCT->getSubProductsByParent($id);
                                                     </div>
                                                     <div class="col-md-1">
                                                         <div class="form-group">
-                                                            <input id="no-of-sub-products" name="no_of_sub_products" type="hidden" value="1" />
+                                                            <!-- <input id="no-of-sub-products" name="no_of_sub_products" type="hidden" value="1" /> -->
                                                             <button id="add-row" class="btn btn-primary">Add Row</button>
                                                         </div>
                                                     </div>
                                                 <?php
                                                 }
                                                 ?>
+                                                <input id="no-of-sub-products" name="no_of_sub_products" type="hidden" value="<?= $no_of_sub_products; ?>" />
                                     </fieldset>
                                 </div>
                                 <div class="col-md-12">

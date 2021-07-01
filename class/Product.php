@@ -11,7 +11,8 @@
  *
  * @author W j K n``
  */
-class Product {
+class Product
+{
 
     public $id;
     public $category;
@@ -30,7 +31,8 @@ class Product {
     public $parent;
     public $queue;
 
-    public function __construct($id) {
+    public function __construct($id)
+    {
         if ($id) {
 
             $query = "SELECT * FROM `product` WHERE `id`=" . $id;
@@ -60,24 +62,25 @@ class Product {
         }
     }
 
-    public function create() {
+    public function create()
+    {
 
         $query = "INSERT INTO `product` (`category`,`sub_category`,`brand`,`name`,`discount`,`unit`,`price`,`image_name`,`short_description`,`description`,`in_stock`,`min_qty`,`max_qty`,`parent`,`queue`) VALUES  ('"
-                . $this->category . "','"
-                . $this->sub_category . "','"
-                . $this->brand . "','"
-                . $this->name . "', '"
-                . $this->discount . "', '"
-                . $this->unit . "', '"
-                . $this->price . "', '"
-                . $this->image_name . "', '"
-                . $this->short_description . "', '"
-                . $this->description . "', '"
-                . $this->in_stock . "', '"
-                . $this->min_qty . "', '"
-                . $this->max_qty . "', '"
-                . $this->parent . "', '"
-                . $this->queue . "')";
+            . $this->category . "','"
+            . $this->sub_category . "','"
+            . $this->brand . "','"
+            . $this->name . "', '"
+            . $this->discount . "', '"
+            . $this->unit . "', '"
+            . $this->price . "', '"
+            . $this->image_name . "', '"
+            . $this->short_description . "', '"
+            . $this->description . "', '"
+            . $this->in_stock . "', '"
+            . $this->min_qty . "', '"
+            . $this->max_qty . "', '"
+            . $this->parent . "', '"
+            . $this->queue . "')";
 
 
         $db = new Database();
@@ -93,7 +96,8 @@ class Product {
         }
     }
 
-    public function all() {
+    public function all()
+    {
 
         $query = "SELECT * FROM `product` ORDER BY queue ASC";
         $db = new Database();
@@ -106,7 +110,8 @@ class Product {
 
         return $array_res;
     }
-    public function getAllParentProducts() {
+    public function getAllParentProducts()
+    {
 
         $query = "SELECT * FROM `product` WHERE `parent` = 0 ORDER BY queue ASC";
         $db = new Database();
@@ -119,8 +124,9 @@ class Product {
 
         return $array_res;
     }
-    
-    public function getNewProducts() {
+
+    public function getNewProducts()
+    {
 
         $query = "SELECT * FROM `product` ORDER BY `id` DESC";
         $db = new Database();
@@ -133,8 +139,9 @@ class Product {
 
         return $array_res;
     }
-    
-    public function getFeaturedProducts() {
+
+    public function getFeaturedProducts()
+    {
 
         $query = "SELECT * FROM `product` GROUP BY `category`";
         $db = new Database();
@@ -147,8 +154,9 @@ class Product {
 
         return $array_res;
     }
-    
-    public function getOfferedProducts() {
+
+    public function getOfferedProducts()
+    {
 
         $query = "SELECT * FROM `product` WHERE `discount` != 0";
         $db = new Database();
@@ -162,30 +170,31 @@ class Product {
         return $array_res;
     }
 
-    public function update() {
+    public function update()
+    {
 
         $query = "UPDATE  `product` SET "
-                . "`category` ='" . $this->category . "', "
-                . "`sub_category` ='" . $this->sub_category . "', "
-                . "`brand` ='" . $this->brand . "', "
-                . "`name` ='" . $this->name . "', "
-                . "`discount` ='" . $this->discount . "', "
-                . "`unit` ='" . $this->unit . "', "
-                . "`price` ='" . $this->price . "', "
-                . "`image_name` ='" . $this->image_name . "', "
-                . "`short_description` ='" . $this->short_description . "', "
-                . "`description` ='" . $this->description . "', "
-                . "`in_stock` ='" . $this->in_stock . "', "
-                . "`min_qty` ='" . $this->min_qty . "', "
-                . "`max_qty` ='" . $this->max_qty . "', "
-                . "`parent` ='" . $this->parent . "', "
-                . "`queue` ='" . $this->queue . "' "
-                . "WHERE `id` = '" . $this->id . "'";
-                // dd($query);
+            . "`category` ='" . $this->category . "', "
+            . "`sub_category` ='" . $this->sub_category . "', "
+            . "`brand` ='" . $this->brand . "', "
+            . "`name` ='" . $this->name . "', "
+            . "`discount` ='" . $this->discount . "', "
+            . "`unit` ='" . $this->unit . "', "
+            . "`price` ='" . $this->price . "', "
+            . "`image_name` ='" . $this->image_name . "', "
+            . "`short_description` ='" . $this->short_description . "', "
+            . "`description` ='" . $this->description . "', "
+            . "`in_stock` ='" . $this->in_stock . "', "
+            . "`min_qty` ='" . $this->min_qty . "', "
+            . "`max_qty` ='" . $this->max_qty . "', "
+            . "`parent` ='" . $this->parent . "', "
+            . "`queue` ='" . $this->queue . "' "
+            . "WHERE `id` = '" . $this->id . "'";
+        // dd($query);
         $db = new Database();
 
         $result = $db->readQuery($query);
-        
+
         if ($result) {
             return $this->__construct($this->id);
         } else {
@@ -193,7 +202,8 @@ class Product {
         }
     }
 
-    public function delete() {
+    public function delete()
+    {
 
 
         $query = 'DELETE FROM `product` WHERE id="' . $this->id . '"';
@@ -203,17 +213,19 @@ class Product {
         return $db->readQuery($query);
     }
 
-    public function deleteByParentID() {
+    public function deleteByParentID()
+    {
 
 
         $query = 'DELETE FROM `product` WHERE `parent`="' . $this->parent . '"';
-        
+
         $db = new Database();
 
         return $db->readQuery($query);
     }
 
-    public function getProductsBySubProduct($sub_category) {
+    public function getProductsBySubProduct($sub_category)
+    {
 
 
         $query = 'SELECT * FROM `product` WHERE sub_category="' . $sub_category . '" ORDER BY queue ASC';
@@ -229,7 +241,8 @@ class Product {
         return $array_res;
     }
 
-    public function getProductsByBrand($brand) {
+    public function getProductsByBrand($brand)
+    {
 
 
         $query = 'SELECT * FROM `product` WHERE `brand`="' . $brand . '"   ORDER BY queue ASC';
@@ -245,7 +258,8 @@ class Product {
         return $array_res;
     }
 
-    public function getBrandByCategory($category) {
+    public function getBrandByCategory($category)
+    {
 
         $query = 'SELECT DISTINCT `brand`  FROM `product` WHERE `category`="' . $category . '"';
 
@@ -259,7 +273,8 @@ class Product {
         return $array_res;
     }
 
-    public function getProductsBySubCategory($subcategory) {
+    public function getProductsBySubCategory($subcategory)
+    {
 
         $query = 'SELECT * FROM `product` WHERE sub_category="' . $subcategory . '"   ORDER BY queue ASC';
 
@@ -288,7 +303,23 @@ class Product {
         }
         return $array_res;
     }
-    public function getSubProductsByParent($id) {
+    public function getParentProductsByCategory($category)
+    {
+
+        $query = 'SELECT * FROM `product` WHERE category="' . $category . '" AND `parent` = 0 ORDER BY queue ASC';
+
+        $db = new Database();
+
+        $result = $db->readQuery($query);
+        $array_res = array();
+
+        while ($row = mysql_fetch_array($result)) {
+            array_push($array_res, $row);
+        }
+        return $array_res;
+    }
+    public function getSubProductsByParent($id)
+    {
 
         $query = 'SELECT * FROM `product` WHERE `parent`="' . $id . '" ORDER BY queue ASC';
 
@@ -302,22 +333,20 @@ class Product {
         }
         return $array_res;
     }
-    public function getMinimumPrice($id) {
 
-        $query = 'SELECT min(`price`) FROM `product` WHERE `parent`="' . $id . '" GROUP BY `parent`';
+    public function getMinimumPrice($id)
+    {
 
+        $query = 'SELECT `id`, min(`price`) AS price, `discount` FROM `product` WHERE `parent`="' . $id . '" GROUP BY `parent`';
+        
         $db = new Database();
-
-        $result = $db->readQuery($query);
-        $array_res = array();
-
-        while ($row = mysql_fetch_array($result)) {
-            array_push($array_res, $row);
-        }
-        return $array_res;
+        $result = mysql_fetch_array($db->readQuery($query));
+        // dd($result);
+        return $result;
     }
 
-    public function getProductsByCategories($category, $minimum_price, $maximum_price, $sub_category, $brand, $pageLimit, $setLimit) {
+    public function getProductsByCategories($category, $minimum_price, $maximum_price, $sub_category, $brand, $pageLimit, $setLimit)
+    {
 
         if (isset($category)) {
 
@@ -401,7 +430,7 @@ class Product {
             $out_put .= '</li> ';
             $BRAND = new Brand($row['brand']);
             $out_put .= ''
-                    . '<div class="modal fade" id="modalLoginForm' . $row['id'] . '"tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                . '<div class="modal fade" id="modalLoginForm' . $row['id'] . '"tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
                  aria-hidden="true">
                 <div class="modal-dialog" role="document"> 
                     <div class="modal-content">
@@ -461,8 +490,9 @@ class Product {
         }
     }
 
-    public function getAllProducts($minimum_price, $maximum_price, $pageLimit, $setLimit) {
-//    public function getAllProducts($minimum_price, $maximum_price) {
+    public function getAllProducts($minimum_price, $maximum_price, $pageLimit, $setLimit)
+    {
+        //    public function getAllProducts($minimum_price, $maximum_price) {
 
 
         $query = 'SELECT * FROM `product` ';
@@ -535,7 +565,7 @@ class Product {
             $out_put .= '</li> ';
             $BRAND = new Brand($row['brand']);
             $out_put .= ''
-                    . '<div class="modal fade" id="modalLoginForm' . $row['id'] . '"tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                . '<div class="modal fade" id="modalLoginForm' . $row['id'] . '"tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
                  aria-hidden="true">
                 <div class="modal-dialog" role="document"> 
                     <div class="modal-content">
@@ -595,7 +625,8 @@ class Product {
         }
     }
 
-    public function getProductsByBrands($brand_id, $brand, $minimum_price, $maximum_price) {
+    public function getProductsByBrands($brand_id, $brand, $minimum_price, $maximum_price)
+    {
 
         if (isset($brand_id)) {
 
@@ -611,7 +642,7 @@ class Product {
                 $query .= 'OR `brand` in(' . $brand_filter . ')';
             }
 
-//            $query .= ' ORDER BY  queue DESC LIMIT ' . $page . ',' . $per_page . '';
+            //            $query .= ' ORDER BY  queue DESC LIMIT ' . $page . ',' . $per_page . '';
         }
 
 
@@ -676,7 +707,7 @@ class Product {
             $out_put .= '</li> ';
             $BRAND = new Brand($row['brand']);
             $out_put .= ''
-                    . '<div class="modal fade" id="modalLoginForm' . $row['id'] . '"tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                . '<div class="modal fade" id="modalLoginForm' . $row['id'] . '"tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
                  aria-hidden="true">
                 <div class="modal-dialog" role="document"> 
                     <div class="modal-content">
@@ -736,7 +767,8 @@ class Product {
         }
     }
 
-    public function getMaxPriceInProduct($category, $sub_category, $brand) {
+    public function getMaxPriceInProduct($category, $sub_category, $brand)
+    {
 
         if (isset($category)) {
 
@@ -760,7 +792,8 @@ class Product {
         return $row;
     }
 
-    public function getMinPriceInProduct($category, $sub_category, $brand) {
+    public function getMinPriceInProduct($category, $sub_category, $brand)
+    {
 
         if (isset($category)) {
 
@@ -784,22 +817,23 @@ class Product {
         return $row;
     }
 
-//    public function getProductsByCategoryByAll($category, $pageLimit, $setLimit) {
-//
-//        $query = "SELECT * FROM `product` where `category` = " . $category . "   ORDER BY queue DESC LIMIT " . $pageLimit . " , " . $setLimit . "  ";
-//
-//        $db = new Database();
-//
-//        $result = $db->readQuery($query);
-//        $array_res = array();
-//
-//        while ($row = mysql_fetch_array($result)) {
-//            array_push($array_res, $row);
-//        }
-//        return $array_res;
-//    }
+    //    public function getProductsByCategoryByAll($category, $pageLimit, $setLimit) {
+    //
+    //        $query = "SELECT * FROM `product` where `category` = " . $category . "   ORDER BY queue DESC LIMIT " . $pageLimit . " , " . $setLimit . "  ";
+    //
+    //        $db = new Database();
+    //
+    //        $result = $db->readQuery($query);
+    //        $array_res = array();
+    //
+    //        while ($row = mysql_fetch_array($result)) {
+    //            array_push($array_res, $row);
+    //        }
+    //        return $array_res;
+    //    }
 
-    public function arrange($key, $img) {
+    public function arrange($key, $img)
+    {
 
         $query = "UPDATE `product` SET `queue` = '" . $key . "'  WHERE id = '" . $img . "'";
         $db = new Database();
@@ -807,7 +841,8 @@ class Product {
         return $result;
     }
 
-    public function showPagination11111($id, $sub_category, $brand, $per_page, $page) {
+    public function showPagination11111($id, $sub_category, $brand, $per_page, $page)
+    {
 
         $page_url = "?";
         if (isset($id)) {
@@ -870,8 +905,7 @@ class Product {
 
                     $setPaginate .= "<a href='{$page_url}page= $lpm1'>$lpm1</a>";
                     $setPaginate .= "<a href='{$page_url}page=$setLastpage&id=$id'>$setLastpage</a>";
-                }
-                elseif ($setLastpage - ($adjacents * 2) > $page && $page > ($adjacents * 2)) {
+                } elseif ($setLastpage - ($adjacents * 2) > $page && $page > ($adjacents * 2)) {
 
                     $setPaginate .= "<a href='{$page_url}page=1'>1</a>";
                     $setPaginate .= "<a href='{$page_url}page=2'>2</a>";
@@ -885,8 +919,7 @@ class Product {
                     $setPaginate .= "< class='dot'>..";
                     $setPaginate .= "<a href='{$page_url}page = $lpm1'>$lpm1</a>";
                     $setPaginate .= "<a href='{$page_url}page=$setLastpage&id=$id'>$setLastpage</a>";
-                }
-                else {
+                } else {
                     $setPaginate .= "<a href='{$page_url}page = 1'>1</a>";
                     $setPaginate .= "<a href='{$page_url}page = 2'>2</a>";
                     $setPaginate .= "<li class='dot'>..</li>";
@@ -912,7 +945,8 @@ class Product {
         echo $setPaginate;
     }
 
-    public function showPagination($minimum_price, $maximum_price, $category, $cat, $sub_category, $brand, $per_page, $page) {
+    public function showPagination($minimum_price, $maximum_price, $category, $cat, $sub_category, $brand, $per_page, $page)
+    {
 
         $w = array();
         $where = '';
@@ -932,7 +966,7 @@ class Product {
         if (!empty($category)) {
             $category_list = '';
             foreach ($category as $catl) {
-                
+
                 if (empty($category_list)) {
                     $category_list .= $catl;
                 } else {
@@ -963,7 +997,7 @@ class Product {
 
         $page_url = "?";
         $query = "SELECT COUNT(*) as totalCount FROM `product`  $where  ORDER BY `queue` asc";
-        
+
         $rec = mysql_fetch_array(mysql_query($query));
 
         $total = $rec['totalCount'];
@@ -988,65 +1022,63 @@ class Product {
                 for ($counter = 1; $counter <= $setLastpage; $counter++) {
 
                     if ($counter == $page)
-                        $setPaginate.= "<li><a class='current_page page'>$counter</a></li>";
+                        $setPaginate .= "<li><a class='current_page page'>$counter</a></li>";
                     else
-                        $setPaginate.= "<li><a href='#' class='page' page='$counter'>$counter</a></li>";
+                        $setPaginate .= "<li><a href='#' class='page' page='$counter'>$counter</a></li>";
                 }
-            }
-            elseif ($setLastpage > 5 + ($adjacents * 2)) {
+            } elseif ($setLastpage > 5 + ($adjacents * 2)) {
                 if ($page < 1 + ($adjacents * 2)) {
                     for ($counter = 1; $counter < 4 + ($adjacents * 2); $counter++) {
                         if ($counter == $page)
-                            $setPaginate.= "<li><a class='current_page page'>$counter</a></li>";
+                            $setPaginate .= "<li><a class='current_page page'>$counter</a></li>";
                         else
-                            $setPaginate.= "<li><a href='#' class='page' page='$counter'>$counter</a></li>";
+                            $setPaginate .= "<li><a href='#' class='page' page='$counter'>$counter</a></li>";
                     }
-                    $setPaginate.= "<li class='dot'>...</li>";
-                    $setPaginate.= "<li><a href='#' class='page' page='$lpm1'>$lpm1</a></li>";
-                    $setPaginate.= "<li><a href='#' class='page' page='$setLastpage'>$setLastpage</a></li>";
-                }
-                elseif ($setLastpage - ($adjacents * 2) > $page && $page > ($adjacents * 2)) {
-                    $setPaginate.= "<li><a href='#' class='page' page='1'>1</a></li>";
-                    $setPaginate.= "<li><a href='#' class='page' page='2'>2</a></li>";
-                    $setPaginate.= "<li class='dot'>...</li>";
+                    $setPaginate .= "<li class='dot'>...</li>";
+                    $setPaginate .= "<li><a href='#' class='page' page='$lpm1'>$lpm1</a></li>";
+                    $setPaginate .= "<li><a href='#' class='page' page='$setLastpage'>$setLastpage</a></li>";
+                } elseif ($setLastpage - ($adjacents * 2) > $page && $page > ($adjacents * 2)) {
+                    $setPaginate .= "<li><a href='#' class='page' page='1'>1</a></li>";
+                    $setPaginate .= "<li><a href='#' class='page' page='2'>2</a></li>";
+                    $setPaginate .= "<li class='dot'>...</li>";
                     for ($counter = $page - $adjacents; $counter <= $page + $adjacents; $counter++) {
                         if ($counter == $page)
-                            $setPaginate.= "<li><a class='current_page page'>$counter</a></li>";
+                            $setPaginate .= "<li><a class='current_page page'>$counter</a></li>";
                         else
-                            $setPaginate.= "<li><a href='#' class='page' page='$counter'>$counter</a></li>";
+                            $setPaginate .= "<li><a href='#' class='page' page='$counter'>$counter</a></li>";
                     }
-                    $setPaginate.= "<li class='dot'>..</li>";
-                    $setPaginate.= "<li><a href='#' class='page' page='$lpm1'>$lpm1</a></li>";
-                    $setPaginate.= "<li><a href='#' class='page' page='$setLastpage'>$setLastpage</a></li>";
-                }
-                else {
-                    $setPaginate.= "<li><a href='#' class='page' page='1>1</a></li>";
-                    $setPaginate.= "<li><a href='#' class='page' page='2'>2</a></li>";
-                    $setPaginate.= "<li class='dot'>..</li>";
+                    $setPaginate .= "<li class='dot'>..</li>";
+                    $setPaginate .= "<li><a href='#' class='page' page='$lpm1'>$lpm1</a></li>";
+                    $setPaginate .= "<li><a href='#' class='page' page='$setLastpage'>$setLastpage</a></li>";
+                } else {
+                    $setPaginate .= "<li><a href='#' class='page' page='1>1</a></li>";
+                    $setPaginate .= "<li><a href='#' class='page' page='2'>2</a></li>";
+                    $setPaginate .= "<li class='dot'>..</li>";
                     for ($counter = $setLastpage - (2 + ($adjacents * 2)); $counter <= $setLastpage; $counter++) {
                         if ($counter == $page)
-                            $setPaginate.= "<li><a class='current_page page'>$counter</a></li>";
+                            $setPaginate .= "<li><a class='current_page page'>$counter</a></li>";
                         else
-                            $setPaginate.= "<li><a href='#' class='page' page='$counter'>$counter</a></li>";
+                            $setPaginate .= "<li><a href='#' class='page' page='$counter'>$counter</a></li>";
                     }
                 }
             }
 
             if ($page < $counter - 1) {
-                $setPaginate.= "<li><a href='#' class='page' page='$next'>Next</a></li>";
-                $setPaginate.= "<li><a href='#' class='page' page='$setLastpage'>Last</a></li>";
+                $setPaginate .= "<li><a href='#' class='page' page='$next'>Next</a></li>";
+                $setPaginate .= "<li><a href='#' class='page' page='$setLastpage'>Last</a></li>";
             } else {
-                $setPaginate.= "<li><a class='current_page page'>Next</a></li>";
-                $setPaginate.= "<li><a class='current_page page'>Last</a></li>";
+                $setPaginate .= "<li><a class='current_page page'>Next</a></li>";
+                $setPaginate .= "<li><a class='current_page page'>Last</a></li>";
             }
 
-            $setPaginate.= "</ul>\n";
+            $setPaginate .= "</ul>\n";
         }
 
         echo $setPaginate;
     }
 
-    public function showPagination1($id, $sub_category, $brand, $per_page, $page) {
+    public function showPagination1($id, $sub_category, $brand, $per_page, $page)
+    {
 
         $page_url = "?";
         $query = 'SELECT COUNT(*) as totalCount FROM `product`';
@@ -1102,8 +1134,7 @@ class Product {
 
                     $setPaginate .= "<a href='{$page_url}page= $lpm1'>$lpm1</a>";
                     $setPaginate .= "<a href='{$page_url}page=$setLastpage&id=$id'>$setLastpage</a>";
-                }
-                elseif ($setLastpage - ($adjacents * 2) > $page && $page > ($adjacents * 2)) {
+                } elseif ($setLastpage - ($adjacents * 2) > $page && $page > ($adjacents * 2)) {
 
                     $setPaginate .= "<a href='{$page_url}page=1'>1</a>";
                     $setPaginate .= "<a href='{$page_url}page=2'>2</a>";
@@ -1117,8 +1148,7 @@ class Product {
                     $setPaginate .= "< class='dot'>..";
                     $setPaginate .= "<a href='{$page_url}page = $lpm1'>$lpm1</a>";
                     $setPaginate .= "<a href='{$page_url}page=$setLastpage&id=$id'>$setLastpage</a>";
-                }
-                else {
+                } else {
                     $setPaginate .= "<a href='{$page_url}page = 1'>1</a>";
                     $setPaginate .= "<a href='{$page_url}page = 2'>2</a>";
                     $setPaginate .= "<li class='dot'>..</li>";
@@ -1144,7 +1174,8 @@ class Product {
         echo $setPaginate;
     }
 
-    public function getAllProductsByCategoryAndBrand($category, $cat, $minimum_price, $maximum_price, $sub_category, $brand, $pageLimit, $setLimit) {
+    public function getAllProductsByCategoryAndBrand($category, $cat, $minimum_price, $maximum_price, $sub_category, $brand, $pageLimit, $setLimit)
+    {
 
 
         $w = array();
@@ -1249,7 +1280,7 @@ class Product {
             $out_put .= '</li> ';
             $BRAND = new Brand($row['brand']);
             $out_put .= ''
-                    . '<div class="modal fade" id="modalLoginForm' . $row['id'] . '"tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                . '<div class="modal fade" id="modalLoginForm' . $row['id'] . '"tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
                  aria-hidden="true">
                 <div class="modal-dialog" role="document"> 
                     <div class="modal-content">
@@ -1309,7 +1340,8 @@ class Product {
         }
     }
 
-    public function getMaxPriceInProduct1($category, $cat, $sub_category, $brand) {
+    public function getMaxPriceInProduct1($category, $cat, $sub_category, $brand)
+    {
         if ((isset($category) && !empty($category)) || (isset($cat) && !empty($cat))) {
             $cat_list = '';
             foreach ($category as $cat) {
@@ -1344,7 +1376,8 @@ class Product {
         return $row;
     }
 
-    public function getMinPriceInProduct1($category, $cat, $sub_category, $brand) {
+    public function getMinPriceInProduct1($category, $cat, $sub_category, $brand)
+    {
 
         if ((isset($category) && !empty($category)) || (isset($cat) && !empty($cat))) {
             $cat_list = '';
@@ -1379,7 +1412,8 @@ class Product {
         return $row;
     }
 
-    public function search($category, $keyword, $pageLimit, $setLimit) {
+    public function search($category, $keyword, $pageLimit, $setLimit)
+    {
 
         $w = array();
         $where = '';
@@ -1411,7 +1445,8 @@ class Product {
         return $array_res;
     }
 
-    public function showPaginationForSearch($category, $keyword, $per_page, $page) {
+    public function showPaginationForSearch($category, $keyword, $per_page, $page)
+    {
         $w = array();
         $where = '';
 
@@ -1452,62 +1487,58 @@ class Product {
                 for ($counter = 1; $counter <= $setLastpage; $counter++) {
 
                     if ($counter == $page)
-                        $setPaginate.= "<li><a class='current_page'>$counter</a></li>";
+                        $setPaginate .= "<li><a class='current_page'>$counter</a></li>";
                     else
-                        $setPaginate.= "<li><a href='{$page_url}page=$counter&category=$category&keyword=$keyword'>$counter</a></li>";
+                        $setPaginate .= "<li><a href='{$page_url}page=$counter&category=$category&keyword=$keyword'>$counter</a></li>";
                 }
-            }
-            elseif ($setLastpage > 5 + ($adjacents * 2)) {
+            } elseif ($setLastpage > 5 + ($adjacents * 2)) {
                 if ($page < 1 + ($adjacents * 2)) {
                     for ($counter = 1; $counter < 4 + ($adjacents * 2); $counter++) {
                         if ($counter == $page)
-                            $setPaginate.= "<li><a class='current_page'>$counter</a></li>";
+                            $setPaginate .= "<li><a class='current_page'>$counter</a></li>";
                         else
-                            $setPaginate.= "<li><a href='{$page_url}page=$counter&category=$category&keyword=$keyword'>$counter</a></li>";
+                            $setPaginate .= "<li><a href='{$page_url}page=$counter&category=$category&keyword=$keyword'>$counter</a></li>";
                     }
-                    $setPaginate.= "<li class='dot'>...</li>";
-                    $setPaginate.= "<li><a href='{$page_url}page=$lpm1&category=$category&keyword=$keyword'>$lpm1</a></li>";
-                    $setPaginate.= "<li><a href='{$page_url}page=$setLastpage&category=$category&keyword=$keyword'>$setLastpage</a></li>";
-                }
-                elseif ($setLastpage - ($adjacents * 2) > $page && $page > ($adjacents * 2)) {
-                    $setPaginate.= "<li><a href='{$page_url}page=1&category=$category&keyword=$keyword'>1</a></li>";
-                    $setPaginate.= "<li><a href='{$page_url}page=2&category=$category&keyword=$keyword'>2</a></li>";
-                    $setPaginate.= "<li class='dot'>...</li>";
+                    $setPaginate .= "<li class='dot'>...</li>";
+                    $setPaginate .= "<li><a href='{$page_url}page=$lpm1&category=$category&keyword=$keyword'>$lpm1</a></li>";
+                    $setPaginate .= "<li><a href='{$page_url}page=$setLastpage&category=$category&keyword=$keyword'>$setLastpage</a></li>";
+                } elseif ($setLastpage - ($adjacents * 2) > $page && $page > ($adjacents * 2)) {
+                    $setPaginate .= "<li><a href='{$page_url}page=1&category=$category&keyword=$keyword'>1</a></li>";
+                    $setPaginate .= "<li><a href='{$page_url}page=2&category=$category&keyword=$keyword'>2</a></li>";
+                    $setPaginate .= "<li class='dot'>...</li>";
                     for ($counter = $page - $adjacents; $counter <= $page + $adjacents; $counter++) {
                         if ($counter == $page)
-                            $setPaginate.= "<li><a class='current_page'>$counter</a></li>";
+                            $setPaginate .= "<li><a class='current_page'>$counter</a></li>";
                         else
-                            $setPaginate.= "<li><a href='{$page_url}page=$counter&category=$category&keyword=$keyword'>$counter</a></li>";
+                            $setPaginate .= "<li><a href='{$page_url}page=$counter&category=$category&keyword=$keyword'>$counter</a></li>";
                     }
-                    $setPaginate.= "<li class='dot'>..</li>";
-                    $setPaginate.= "<li><a href='{$page_url}page=$lpm1&category=$category&keyword=$keyword'>$lpm1</a></li>";
-                    $setPaginate.= "<li><a href='{$page_url}page=$setLastpage&category=$category&keyword=$keyword'>$setLastpage</a></li>";
-                }
-                else {
-                    $setPaginate.= "<li><a href='{$page_url}page=1&category=$category&keyword=$keyword'>1</a></li>";
-                    $setPaginate.= "<li><a href='{$page_url}page=2&category=$category&keyword=$keyword'>2</a></li>";
-                    $setPaginate.= "<li class='dot'>..</li>";
+                    $setPaginate .= "<li class='dot'>..</li>";
+                    $setPaginate .= "<li><a href='{$page_url}page=$lpm1&category=$category&keyword=$keyword'>$lpm1</a></li>";
+                    $setPaginate .= "<li><a href='{$page_url}page=$setLastpage&category=$category&keyword=$keyword'>$setLastpage</a></li>";
+                } else {
+                    $setPaginate .= "<li><a href='{$page_url}page=1&category=$category&keyword=$keyword'>1</a></li>";
+                    $setPaginate .= "<li><a href='{$page_url}page=2&category=$category&keyword=$keyword'>2</a></li>";
+                    $setPaginate .= "<li class='dot'>..</li>";
                     for ($counter = $setLastpage - (2 + ($adjacents * 2)); $counter <= $setLastpage; $counter++) {
                         if ($counter == $page)
-                            $setPaginate.= "<li><a class='current_page'>$counter</a></li>";
+                            $setPaginate .= "<li><a class='current_page'>$counter</a></li>";
                         else
-                            $setPaginate.= "<li><a href='{$page_url}page=$counter&category=$category&keyword=$keyword'>$counter</a></li>";
+                            $setPaginate .= "<li><a href='{$page_url}page=$counter&category=$category&keyword=$keyword'>$counter</a></li>";
                     }
                 }
             }
 
             if ($page < $counter - 1) {
-                $setPaginate.= "<li><a href='{$page_url}page=$next&category=$category&keyword=$keyword'>Next</a></li>";
-                $setPaginate.= "<li><a href='{$page_url}page=$setLastpage&category=$category&keyword=$keyword'>Last</a></li>";
+                $setPaginate .= "<li><a href='{$page_url}page=$next&category=$category&keyword=$keyword'>Next</a></li>";
+                $setPaginate .= "<li><a href='{$page_url}page=$setLastpage&category=$category&keyword=$keyword'>Last</a></li>";
             } else {
-                $setPaginate.= "<li><a class='current_page'>Next</a></li>";
-                $setPaginate.= "<li><a class='current_page'>Last</a></li>";
+                $setPaginate .= "<li><a class='current_page'>Next</a></li>";
+                $setPaginate .= "<li><a class='current_page'>Last</a></li>";
             }
 
-            $setPaginate.= "</ul>\n";
+            $setPaginate .= "</ul>\n";
         }
 
         echo $setPaginate;
     }
-
 }

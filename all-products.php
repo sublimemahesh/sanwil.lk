@@ -24,7 +24,7 @@ if (!isset($_SESSION)) {
     <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
     <link rel="shortcut icon" type="image/x-icon" href="images/favicon.png" />
     <!-- PAGE TITLE HERE -->
-    <title>Ceylon Fine Spice | Products</title>
+    <title>Nutshut | Products</title>
     <!-- MOBILE SPECIFIC -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- STYLESHEETS -->
@@ -85,8 +85,17 @@ if (!isset($_SESSION)) {
                             <?php
                             $PRODUCT = new Product(NULL);
                             foreach ($PRODUCT->getAllParentProducts() as $product) {
-                                $discount = ($product['price'] * $product['discount']) / 100;
-                                $price = $product['price'] - $discount;
+                                $sub_r_products = Product::getSubProductsByParent($product['id']);
+                                if (count($sub_r_products) > 0) {
+                                    $min_price = Product::getMinimumPrice($product['id']);
+                                    $discount = ($min_price['price'] * $min_price['discount']) / 100;
+                                    $price = $min_price['price'] - $discount;
+                                    $old_price = $min_price['price'];
+                                } else {
+                                    $discount = ($product['price'] * $product['discount']) / 100;
+                                    $price = $product['price'] - $discount;
+                                    $old_price = $product['price'];
+                                }
                             ?>
                                 <div class="dz-col col m-b30 ">
                                     <div class="item-box shop-item style2 product-box-h">
@@ -102,7 +111,7 @@ if (!isset($_SESSION)) {
                                                 <?php
                                                 if ($discount != 0) {
                                                 ?>
-                                                    <del>Rs. <?php echo number_format($product['price'], 2); ?></del>
+                                                    <del>Rs. <?php echo number_format($old_price, 2); ?></del>
                                                 <?php
                                                 }
                                                 ?>
@@ -114,15 +123,15 @@ if (!isset($_SESSION)) {
                                                 <input type="hidden" id="price<?= $product['id']; ?>" value="<?= $price; ?>" />
                                                 <input type="hidden" id="quantity<?= $product['id']; ?>" value="1" />
                                                 <div class="cart-btn ">
+                                                <a href="product.php?id=<?php echo $product['id']; ?>" class="btn btnhover radius-xl"><i class="fa fa-eye"></i> View Product</a>
                                                     <!-- <div id="<?php echo $product['id']; ?>" min-qty="<?php echo $product['min_qty']; ?>" max-qty="<?php echo $product['max_qty']; ?>" class="add_to_cart btn btnhover radius-xl"><i class="fa fa-shopping-cart"></i> Add to Cart</div> -->
-                                                    <a href="product.php?id=<?php echo $product['id']; ?>" class="btn btnhover radius-xl"><i class="fa fa-eye"></i> View Product</a>
                                                 </div>
                                             <?php
                                             } else {
                                             ?>
-
-                                                <!-- <div class="cart-btn "><i class="ti-shopping-cart"></i> Not in Stock</div> -->
                                                 <a href="product.php?id=<?php echo $product['id']; ?>" class="btn btnhover radius-xl"><i class="fa fa-eye"></i> View Product</a>
+                                                <!-- <div class="cart-btn "><i class="ti-shopping-cart"></i> Not in Stock</div> -->
+
                                             <?php
                                             }
                                             ?>
