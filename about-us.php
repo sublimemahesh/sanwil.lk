@@ -23,7 +23,7 @@ if (!isset($_SESSION)) {
         <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
         <link rel="shortcut icon" type="image/x-icon" href="images/favicon.png" />
         <!-- PAGE TITLE HERE -->
-        <title>Ceylon Fine Spice | About Us</title>
+        <title>Sanwil Products | About Us</title>
         <!-- MOBILE SPECIFIC -->
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- STYLESHEETS -->
@@ -84,7 +84,7 @@ if (!isset($_SESSION)) {
                             <div class="row align-items-center">
                                 <div class="col-lg-4 col-md-12">
                                     <div class="section-head food-head m-b30">
-                                        <h2 class="title">About<br/> <?php echo $ABOUTUS->title ?></h2>
+                                        <h2 class="title">About <?php echo $ABOUTUS->title ?></h2>
                                         <p><?php echo $ABOUTUS->description ?> </p>
                                       
                                     </div>

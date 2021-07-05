@@ -22,7 +22,7 @@ if (!isset($_SESSION)) {
         <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
         <link rel="shortcut icon" type="image/x-icon" href="images/favicon.png" />
         <!-- PAGE TITLE HERE -->
-        <title>Ceylon Fine Spice | Contact Us</title>
+        <title>Sanwil Products | Contact Us</title>
         <!-- MOBILE SPECIFIC -->
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- STYLESHEETS -->
@@ -91,33 +91,32 @@ if (!isset($_SESSION)) {
                                                     <div class="icon-bx-xs border-1 text-primary"><i class="ti-location-pin icon-cell"></i> </div>
                                                     <div class="icon-content">
                                                         <h6 class="text-uppercase m-tb0 dlab-tilte">Address:</h6>
-                                                        <p class="contact-p">Ceylon Fine Spices , No.46/4, Hanwella Jct Rd, Padukka.</p>
+                                                        <p class="contact-p">Sanwil Products, No 624/A/31, Ranawaka Mw, Thundhahena, Korathota.</p>
                                                     </div>
                                                 </a>
                                             </li>
                                             <li class="icon-bx-wraper left  m-b30">
-                                                <a href="javascript:void(0);" >
+                                                <a href="mailto:sanwilproducts@gmail.com" >
                                                     <div class="icon-bx-xs border-1 text-primary"> <i class="ti-email icon-cell"></i> </div>
                                                     <div class="icon-content">
                                                         <h6 class="text-uppercase m-tb0 dlab-tilte">Email:</h6>
-                                                        <p class="contact-p">info@example.com</p>
+                                                        <p class="contact-p">sanwilproducts@gmail.com</p>
                                                     </div>
                                                 </a>
                                             </li>
                                             <li class="icon-bx-wraper left">
-                                                <a href="javascript:void(0);" class="">
-                                                    <div class="icon-bx-xs border-1 text-primary"> <i class="ti-mobile icon-cell"></i></div>
-                                                    <div class="icon-content">
-                                                        <h6 class="text-uppercase m-tb0 dlab-tilte">PHONE</h6>
-                                                        <p class="contact-p">+94 77 660 0670</p>
-                                                    </div>
-                                                </a> 
+                                                <div class="icon-bx-xs border-1 text-primary"> <i class="ti-mobile icon-cell"></i></div>
+                                                <div class="icon-content">
+                                                    <h6 class="text-uppercase m-tb0 dlab-tilte">PHONE</h6>
+                                                    <a href="tel:+94779917890" class=""><p class="contact-p">+94 77 991 7890</p></a>
+                                                    <a href="tel:+94722800233" class=""><p class="contact-p">+94 72 280 0233</p></a>
+                                                </div>
                                             </li>
                                         </ul>
                                         <div class="m-t20">
                                             <ul class="dlab-social-icon dlab-social-icon-lg">
-                                                <li><a href="https://www.facebook.com/ceylon.finespice.9" class="fa fa-facebook bg-primary" target="_blank"></a></li>
-                                                <li><a href="https://api.whatsapp.com/send?phone=94776600670" class="fa fa-whatsapp bg-primary" target="_blank"></a></li>
+                                                <li><a href="#" class="fa fa-facebook bg-primary" target="_blank"></a></li>
+                                                <li><a href="https://api.whatsapp.com/send?phone=94779917890" class="fa fa-whatsapp bg-primary" target="_blank"></a></li>
                                                 <li><a href="javascript:void(0);" class="fa fa-linkedin bg-primary" target="_blank"></a></li>
                                                 <li><a href="javascript:void(0);" class="fa fa-pinterest-p bg-primary" target="_blank"></a></li>
                                                 <li><a href="javascript:void(0);" class="fa fa-google-plus bg-primary" target="_blank"></a></li>
@@ -178,7 +177,7 @@ if (!isset($_SESSION)) {
                                                 <div class="form-group recaptcha-bx">
                                                     <div class="input-group">
                                                         <input class="form-control" type="text" placeholder="Security Code" name="captchacode" id="captchacode" />
-                                                         <span id="capspan"></span>
+                                                        <span id="capspan"></span>
                                                     </div>
                                                 </div>
                                             </div>

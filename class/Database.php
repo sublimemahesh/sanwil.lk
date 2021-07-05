@@ -20,7 +20,7 @@ class Database {
 
 //    
    private $host = 'localhost';
-   private $name = 'fine_spices';
+   private $name = 'sanwil';
    private $user = 'root';
    private $password = '';
 
