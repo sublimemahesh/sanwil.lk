@@ -2,69 +2,103 @@
 
 //------------------------- IMPORTANT -------------------------
 
-include_once(dirname(__FILE__) . '/../class/include.php');
+require_once "Mail.php";
 
 date_default_timezone_set('Asia/Colombo');
 $todayis = date("l, F j, Y, g:i a");
-$site_link = "https://" . $_SERVER['HTTP_HOST'];
+$site_link = "http://" . $_SERVER['HTTP_HOST'];
 
 //----------------------- DISPLAY STRINGS ---------------------
-$comany_name = "Ceylon Fine Spice";
-$website_name = "www.ceylonfinespice.com";
-$comConNumber = "+94 773 051 737";
-$comEmail = "info@ceylonfinespice.com";
-$comOwner = "Team Ceylon Fine Spice";
-$reply_email_name = 'CEYLON FINE SPICE';
+$comany_name = "Sanwil Products";
+$website_name = "www.sanwil.lk";
+$comConNumber = "+94 77 991 7890";
+$comEmail = "sanwilproducts@gmail.com";
+$comOwner = "Sanwil Products";
 $customer_msg = 'Hello, and thank you for your interest in ' . $comany_name . '. We have received your enquiry, and we will get back to you as soon as possible.';
 
 //----------------------- LOGO ---------------------------------
 
-$logo = $site_link . '/contact-form/img/logo.png';
-// $logo = 'https://ci4.googleusercontent.com/proxy/lz0tSijRTHwJ3I7PQ1iXA67lYFfULG0evRbR_St785VeiABNukQPJl-JGBcLKTkZz1q4pG6g25P1uxTW4dYkOznHHNV3f-zB=s0-d-e1-ft#http://romaya.galle.website/contact-form/img/logo.png';
+//$logo = $site_link . '/contact-form/img/logo.png';
+//$logo = 'https://ci4.googleusercontent.com/proxy/lz0tSijRTHwJ3I7PQ1iXA67lYFfULG0evRbR_St785VeiABNukQPJl-JGBcLKTkZz1q4pG6g25P1uxTW4dYkOznHHNV3f-zB=s0-d-e1-ft#http://romaya.galle.website/contact-form/img/logo.png';
 
 // ----------------------- POST VARIABLES --------------------------
 
 $visitor_name = $_POST['visitor_name'];
 $visitor_email = $_POST['visitor_email'];
 $visitor_phone = $_POST['visitor_phone'];
-//$visitor_subject = $_POST['subject'];
 $message = $_POST['message'];
 
+
+//---------------------- SERVER WEBMAIL LOGIN ------------------------
+
+$host = "sg1-ls7.a2hosting.com";
+$username = "test@synotec.lk";
+$password = '-6gr.o+PA,]4';
 
 //------------------------ MAIL ESSENTIALS --------------------------------
 
 $webmail = "test@synotec.lk";
-// $webmail = "info@goldenelectrical.com";
-$visitorSubject = "Thank You " . $visitor_name . " - " . $comany_name;
-$companySubject = "Contact Inquiry - " . $visitor_name;
+$visitorSubject = "Thank You " . $visitor_name . " - Sanwil Products";
+$companySubject = "Contact Enquiry - " . $visitor_name;
 
 //----------------------CAPTCHACODE---------------------
 
 session_start();
+
 $response = array();
 
 if ($_SESSION['CAPTCHACODE'] != $_POST['captchacode']) {
-    $response['status'] = 'wrong_code';
+
+    $response['status'] = 'incorrect';
+
     $response['msg'] = 'Security Code is invalid';
+
     echo json_encode($response);
+
     exit();
 }
 
 include("mail-template.php");
 
-$HELPER = new Helper();
-$visitorMail = $HELPER->PHPMailer($webmail, $comany_name, $comEmail, $reply_email_name, $visitor_email, $visitor_name, $visitorSubject, $visitor_message);
 
-$companyMail = $HELPER->PHPMailer($webmail, $visitor_name, $visitor_email, $visitor_name, $comEmail, $comany_name, $companySubject, $company_message);
+$visitorHeaders = array('MIME-Version' => '1.0', 'Content-Type' => "text/html; charset=ISO-8859-1", 'From' => $webmail,
+    'To' => $visitor_email,
+    'Reply-To' => $comEmail,
+    'Subject' => $visitorSubject);
 
-if ($visitorMail && $companyMail) {
+$companyHeaders = array('MIME-Version' => '1.0', 'Content-Type' => "text/html; charset=ISO-8859-1", 'From' => $webmail,
+    'To' => $webmail,
+    'Reply-To' => $visitor_email,
+    'Subject' => $companySubject);
+
+
+$smtp = Mail::factory('smtp', array('host' => $host,
+            'auth' => true,
+            'username' => $username,
+            'password' => $password));
+
+$visitorMail = $smtp->send($visitor_email, $visitorHeaders, $visitor_message);
+$companyMail = $smtp->send($webmail, $companyHeaders, $company_message);
+
+if (PEAR::isError($visitorMail && $companyMail)) {
+
     $response['status'] = 'correct';
-    $response['msg'] = "Your message has been sent successfully";
+
+    $response['msg'] = $mail->getMessage();
+
+//"Your message has not been sent"
+
     echo json_encode($response);
+
     exit();
 } else {
-    $response['status'] = 'incorrect';
-    $response['msg'] = "Your message has not been sent";
+    $response['status'] = 'correct';
+
+    $response['msg'] = "Your message has been sent successfully";
+
+//"Your message has been sent successfully"
+
     echo json_encode($response);
+
     exit();
 }
