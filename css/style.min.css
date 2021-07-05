@@ -4831,7 +4831,8 @@ blockquote cite {
     font-size: 50px;
     margin-bottom: 5px;
     position: relative;
-    line-height: 1.5
+    line-height: 1.5;
+    margin-top: 35px;
 }
 
 .dlab-bnr-inr h1:after {
