@@ -29,17 +29,18 @@
                     <div class="widget-link"> 
                         <ul>
                             <li><a href="./">Home</a></li> 
-                            <li><a href="#">About Us</a></li> 
-                            <li><a href="#">Product</a></li> 
-                            <li><a href="#">Offer</a></li> 
-                            <li><a href="#">Contact Us</a></li> 
+                            <li><a href="about-us.php">About Us</a></li> 
+                            <li><a href="all-products.php">Product</a></li> 
+                            <li><a href="offers.php">Offer</a></li> 
+                            <li><a href="contact-us.php">Contact Us</a></li> 
                             <li><a href="member/">My Account</a></li> 
                         </ul>
                     </div>
+                    
                     <p class="copyright">Copyright © 2021 Sanwil. all rights reserved.</p>
                     <ul class="dlab-social-icon">
-                        <li><a href="https://www.facebook.com/ceylon.finespice.9" class="btn white outline circle" target="blank"><i class="fa fa-facebook"></i></a></li>
-                        <li><a href="https://api.whatsapp.com/send?phone=94776600670" class="btn white outline circle" target="blank"><i class="fa fa-google-plus"></i></a></li>
+                        <li><a href="#" class="btn white outline circle" target="blank"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="https://api.whatsapp.com/send?phone=94779917890" class="btn white outline circle" target="blank"><i class="fa fa-google-plus"></i></a></li>
                         <li><a class="btn white outline circle" target="blank"><i class="fa fa-whatsapp"></i></a></li>
                         <li><a class="btn white outline circle" v><i class="fa fa-twitter"></i></a></li>
                     </ul>
