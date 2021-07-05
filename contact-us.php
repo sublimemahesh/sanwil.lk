@@ -128,7 +128,6 @@ if (!isset($_SESSION)) {
                                 <div class="col-lg-8 col-md-12 m-b30">
                                     <h2 class="m-tb5">Contact Us</h2>
                                     <div class="dlab-separator bg-black"></div>
-                                    <p>Lorem ipsum dosectetur adipisicing elit, sed do.Lorem ipsum dolor sit amet, consectetur Nulla fringilla purus at leo dignissim congue.</p>
                                     <div class="dzFormMsg"></div>
                                     <div method="post" class="dzForm" id="contactForm">
                                         <input type="hidden" value="Contact" name="dzToDo" >
@@ -199,7 +198,7 @@ if (!isset($_SESSION)) {
 
                             </div>
                             <div class="col-lg-12 d-flex m-b10">
-                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3961.3885259867925!2d80.08899021403734!3d6.843939321255665!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae25314e4a78809%3A0x2b12180581075ec8!2sCeylon%20Spices!5e0!3m2!1sen!2slk!4v1623735764471!5m2!1sen!2slk" class="align-self-stretch radius-sm" style="border:0; width:100%; min-height:400px; height:100%;" allowfullscreen></iframe>
+                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31686.964488666854!2d79.9835577713154!3d6.906077985135363!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae256af07e4edd5%3A0x2e306b0caa978404!2sKorathota!5e0!3m2!1sen!2slk!4v1625463104983!5m2!1sen!2slk" class="align-self-stretch radius-sm" style="border:0; width:100%; min-height:400px; height:100%;" allowfullscreen></iframe>
                             </div>
                         </div>
                     </div>
