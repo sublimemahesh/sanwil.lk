@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row align-items-center">
             <div class="col-md-6 text-white">
-                <h5 class="m-b0">Love Pizza? Like deals? Be the first to know about our newest menu items and latest offers. More food. less money.</h5>
+                <h5 class="m-b0">Love Tea? Like deals? Be the first to know about our newest menu items and latest offers. More food. less money.</h5>
             </div>
             <div class="col-md-6">
                 <form class="dzSubscribe newslatter" action="https://restroking.dexignzone.com/xhtml/script/mailchamp.php" method="post">
@@ -36,7 +36,7 @@
                             <li><a href="member/">My Account</a></li> 
                         </ul>
                     </div>
-                    <p class="copyright">Copyright © 2021 Ceylon Fine Spice. all rights reserved.</p>
+                    <p class="copyright">Copyright © 2021 Sanwil. all rights reserved.</p>
                     <ul class="dlab-social-icon">
                         <li><a href="https://www.facebook.com/ceylon.finespice.9" class="btn white outline circle" target="blank"><i class="fa fa-facebook"></i></a></li>
                         <li><a href="https://api.whatsapp.com/send?phone=94776600670" class="btn white outline circle" target="blank"><i class="fa fa-google-plus"></i></a></li>
