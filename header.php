@@ -13,7 +13,7 @@
                 </button>
                 <!-- main nav -->
                 <div class="header-nav navbar-collapse collapse justify-content-between" id="navbarNavDropdown">
-                    <ul class="nav navbar-nav nav2">
+                    <ul class="nav navbar-nav nav2 nav-width">
                         <img src="images/logos/1.png"/>
 
                     </ul>
