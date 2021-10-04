@@ -3472,7 +3472,9 @@ blockquote cite {
     display: inline-block;
     text-transform: capitalize
 }
-
+.header2-a{
+    padding: 42px 54px 38px 12px !important;
+}
 .header-nav .nav>li>a:hover {
     background-color: transparent;
     color: #efbb20
@@ -3769,7 +3771,7 @@ blockquote cite {
 .site-header.center .header-nav .nav {
     display: inline-block;
     float: left;
-    width: 35%
+    width: 40%
 }
 
 .site-header.center .navbar-nav>li {
