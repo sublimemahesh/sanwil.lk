@@ -56,7 +56,7 @@ if (!isset($_SESSION)) {
             </div>
             <!-- header -->
             <?php
-            include './header.php';
+            include './header_2.php';
             ?>
             <!-- header END -->
             <!-- Content -->

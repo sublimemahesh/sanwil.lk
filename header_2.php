@@ -4,7 +4,9 @@
         <div class="main-bar clearfix ">
             <div class="container clearfix">
                 <!-- website logo -->
-
+                <div class="logo-header mostion">
+                    <a href="./" class="dez-page"><img src="images/logo.png" alt=""></a>
+                </div>
                 <!-- nav toggle button -->
                 <button class="navbar-toggler collapsed navicon justify-content-end" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                     <span></span>
@@ -13,15 +15,14 @@
                 </button>
                 <!-- main nav -->
                 <div class="header-nav navbar-collapse collapse justify-content-between" id="navbarNavDropdown">
-                    <ul class="nav navbar-nav nav2">
-                        <img src="images/logos/1.png"/>
-
-                    </ul>
-                    <ul class="nav navbar-nav nav1" style="width: 100%;">
-                        <li class="active"><a href="./" class="header2-a">Home</a></li>
-                        <li><a href="about-us.php" class="header2-a">About Us</a></li>
+                    <div class="logo-header mostion">
+                        <a href="./" class="dez-page"><img src="images/logo.png" alt=""></a>
+                    </div>
+                    <ul class="nav navbar-nav nav1">
+                        <li class="active"><a href="./">Home</a></li>
+                        <li><a href="about-us.php">About Us</a></li>
                         <li>
-                            <a href="all-products.php" class="header2-a">Product<i class="fa fa-chevron-down"></i></a>
+                            <a href="all-products.php">Product<i class="fa fa-chevron-down"></i></a>
                             <ul class="sub-menu tab-content">
                                 <?php
                                 $H_PRODUCT_CATEGORIES = new ProductCategories(NULL);
@@ -29,7 +30,7 @@
                                     ?>
                                     <li>
                                         <a href="products.php?category=<?php echo $product_categories['id'] ?>"><?php echo $product_categories['name']; ?> <i class="fa fa-angle-right"></i></a>
-                                        <ul class="sub-menu product-menu">
+                                        <ul class="sub-menu">
                                             <?php
                                             $PRODUCT = new Product(NULL);
                                             foreach ($PRODUCT->getProductsByCategory($product_categories['id']) as $product) {
@@ -46,22 +47,25 @@
                                 ?>
                             </ul>
                         </li>
-                        <li><a href="offers.php" class="header2-a">Offer</a></li>
-                        <li><a href="contact-us.php" class="header2-a">Contact Us</a></li>
+
+                    </ul>
+                    <ul class="nav navbar-nav nav2">
+                        <li><a href="offers.php">Offer</a></li>
+                        <li><a href="contact-us.php">Contact Us</a></li>
                         <?php
                         if (isset($_SESSION['id'])) {
                             ?>
-                            <li><a href="checkout.php" class="header2-a">Oder Now</a></li>
+                            <li><a href="checkout.php">Oder Now</a></li>
                             <?php
                         } else {
                             ?>
-                            <li><a href="login.php" class="header2-a">Oder Now</a></li>
+                            <li><a href="login.php">Oder Now</a></li>
                             <?php
                         }
                         ?>
 
-                    </ul>
 
+                    </ul>
                 </div>
             </div>
         </div>
