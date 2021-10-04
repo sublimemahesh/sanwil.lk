@@ -3465,16 +3465,14 @@ blockquote cite {
     border-radius: 0;
     color: #2b2d2e;
     font-size: 16px;
-    padding: 42px 12px 38px 12px;
+    padding: 42px 15px 38px 15px;
     cursor: pointer;
     font-weight: 600;
     line-height: 20px;
     display: inline-block;
     text-transform: capitalize
 }
-.header2-a{
-    padding: 42px 40px 38px 12px !important;
-}
+
 .header-nav .nav>li>a:hover {
     background-color: transparent;
     color: #efbb20
@@ -3771,7 +3769,7 @@ blockquote cite {
 .site-header.center .header-nav .nav {
     display: inline-block;
     float: left;
-    width: 57%
+    width: 38%
 }
 
 .site-header.center .navbar-nav>li {
@@ -15403,8 +15401,8 @@ pre {
     background: #000 !important;
 }
 .product-area{
-   top: 80px !important;
-  margin-bottom: 150px;
+    top: 80px !important;
+    margin-bottom: 150px;
 }
 .offer-p{
     color: #000;
@@ -15772,4 +15770,13 @@ pre {
 .sub_product_list_price del span {
     font-size: 12px;
     opacity  : .5;
+}
+
+@media(min-width:992px){
+    .header2-a{
+        padding: 42px 40px 38px 12px !important;
+    }
+    .nav-width{
+        width: 57% !important;
+    }
 }
