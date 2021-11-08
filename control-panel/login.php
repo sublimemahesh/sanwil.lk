@@ -27,7 +27,7 @@ include_once(dirname(__FILE__) . '/../class/include.php');
     <head>
         <meta charset="UTF-8">
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-        <title>Sign In | Sublime Web Manager</title>
+        <title>Sign In | Sanwil Web Manager</title>
         <!-- Favicon-->
         <link rel="icon" href="favicon.ico" type="image/x-icon">
 
@@ -52,7 +52,7 @@ include_once(dirname(__FILE__) . '/../class/include.php');
         <div class="login-box">
             <div class="logo">
                 <a href="javascript:void(0);">Web <b>Mananger</b></a>
-                <small>Lorem ipsum dolor sit amet.</small>
+                <small>www.sanwil.lk</small>
             </div>
             <div class="card">
                 <div class="body">
