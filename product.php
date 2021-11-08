@@ -116,10 +116,8 @@ $related_products = Product::getParentProductsByCategory($PRODUCT->category);
                                     <form method="post" class="cart sticky-top">
                                         <div class="dlab-post-title">
                                             <h4 class="post-title"><?php echo $PRODUCT->name; ?></h4>
-                                            <?php
-                                            $CAT = new ProductCategories($PRODUCT->category);
-                                            ?>
-                                            <p class="m-b10">Category : <?php echo $CAT->name; ?></p>
+                                           
+                                            <p class="m-b10">Category : <?= $CAT->name; ?></p>
                                             <div class="dlab-divider bg-gray tb15">
                                                 <i class="icon-dot c-square"></i>
                                             </div>
@@ -273,14 +271,12 @@ $related_products = Product::getParentProductsByCategory($PRODUCT->category);
                                                 <?php
                                             }
                                             ?>
-                                            <?php
-                                            $CAT = new ProductCategories($PRODUCT->category);
-                                            ?>
-                                            <p>Category : <?php echo $CAT->name; ?></p>
+                                           
+                                            <p>Category : <?= $CAT->name; ?></p>
 
 
-                                            <p> Order Limit : Minimum <?php echo ($PRODUCT->min_qty); ?> & Maximum <?php echo ($PRODUCT->max_qty); ?></p>
-
+                                            <p> Order Limit : Minimum <?php echo $PRODUCT->min_qty; ?> & Maximum <?php echo $PRODUCT->max_qty; ?></p>
+                                         
                                         </div>
                                     </div>
                                 </div>
