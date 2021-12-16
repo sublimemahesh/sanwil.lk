@@ -122,7 +122,7 @@ $related_products = Product::getParentProductsByCategory($PRODUCT->category);
                                                 <i class="icon-dot c-square"></i>
                                             </div>
                                         </div>
-                                        <?php
+                                        <?php       
                                         if (count($sub_products) > 0) {
                                             foreach ($sub_products as $sub_product) {
                                                 $discount1 = ($sub_product['price'] * $sub_product['discount']) / 100;
