@@ -31,8 +31,8 @@
                                         <a href="products.php?category=<?php echo $product_categories['id'] ?>"><?php echo $product_categories['name']; ?> <i class="fa fa-angle-right"></i></a>
                                         <ul class="sub-menu product-menu">
                                             <?php
-                                            $PRODUCT = new Product(NULL);
-                                            foreach ($PRODUCT->getProductsByCategory($product_categories['id']) as $product) {
+                                            $HPRODUCT = new Product(NULL);
+                                            foreach ($HPRODUCT->getProductsByCategory($product_categories['id']) as $product) {
                                                 ?>
 
                                                 <li><a href="product.php?id=<?php echo $product['id']; ?>"> <?php echo $product['name']; ?></a></li>

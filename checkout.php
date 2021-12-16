@@ -18,7 +18,7 @@ if (!isset($_SESSION["shopping_cart"]) || empty($_SESSION["shopping_cart"])) {
 $CUSTOMER = new Customer($_SESSION['id']);
 $CITY = new City($CUSTOMER->city);
 $DISTRICT = new District($CUSTOMER->district);
-
+$delivery_charge = DefaultData::getDeliveryCharges();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -38,7 +38,7 @@ $DISTRICT = new District($CUSTOMER->district);
     <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
     <link rel="shortcut icon" type="image/x-icon" href="images/favicon.png" />
     <!-- PAGE TITLE HERE -->
-    <title>Sanwil Products | Checkout</title>
+    <title>Nuts Hut | Checkout</title>
     <!-- MOBILE SPECIFIC -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- STYLESHEETS -->
@@ -218,7 +218,7 @@ $DISTRICT = new District($CUSTOMER->district);
                                 </div>
                                 <div class="form-group">
                                     <select name="city" id="city" class="form-control">
-                                        <option>--Select City--</option>
+                                        <option value="">--Select City--</option>
                                         <?php
                                         foreach (City::GetCitiesByDistrict($CUSTOMER->district) as $city) {
                                             if ($city['id'] == $CUSTOMER->city) {
@@ -301,14 +301,15 @@ $DISTRICT = new District($CUSTOMER->district);
                                     <tbody>
                                         <tr>
                                             <td>Delivery Charges</td>
-                                            <td class="product-price"> Rs 0.00</td>
+                                            <td class="product-price text-right"><span class="amount delivery_charges"> Rs. <?= number_format($DISTRICT->delivery_charge, 2); ?></span></td>
                                         </tr>
                                         <?php
-                                        $grand_total = $tot + 0;
+
+                                        $grand_total = $tot + $DISTRICT->delivery_charge;
                                         ?>
                                         <tr>
                                             <td>Total</td>
-                                            <td class="product-price-total">Rs. <?php echo number_format($grand_total, 2); ?></td>
+                                            <td class="product-price-total text-right"><strong><span class="amount total_amount">Rs. <?php echo number_format($grand_total, 2); ?></span></strong></td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -336,13 +337,15 @@ $DISTRICT = new District($CUSTOMER->district);
                     </div>
                     <div class="row">
                         <div class="col-xs-12 agree-check-box">
-                            <label class="checkbox-container">Click here to indicate that you have read and agree to the booking
+                            <label class="checkbox-container">Click here to indicate that you have read and agree to the <a href="terms-and-conditions.php" target="_blank" class="text-blue">terms and conditions</a>.
                                 <input type="checkbox" name="agree" id="agree"><span class="checkmark">
                                 </span>
                             </label>
                         </div>
                     </div>
                     <div class="btnhover">
+                        <input name="amount" id="sub_total_amount" type="hidden" value="<?php echo $tot; ?>" class="payment">
+                        <input type="hidden" name="delivery_charges" id="delivery_charges" value="<?= $DISTRICT->delivery_charge; ?>" />
                         <input type="hidden" name="total_amount" id="total_amount" value="<?= $grand_total; ?>" />
                         <input type="hidden" name="member" id="member" value="<?= $_SESSION['id']; ?>" />
                         <button data-value="Place order" type="submit" id="place_order" name="woocommerce_checkout_place_order" class="btn btnhover" <?php echo $disabled; ?> prod-total="<?php echo $tot; ?>">Place order</button>
@@ -381,6 +384,7 @@ $DISTRICT = new District($CUSTOMER->district);
     <script src="js/header.js" type="text/javascript"></script>
     <script src="plugins/country-code-selector/js/intlTelInput.min.js" type="text/javascript"></script>
     <script src="plugins/country-code-selector/js/intlTelInput-jquery.min.js" type="text/javascript"></script>
+    <script src="js/delivery_charges.js" type="text/javascript"></script>
 </body>
 
 
