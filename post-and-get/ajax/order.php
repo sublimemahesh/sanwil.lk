@@ -3,7 +3,7 @@
 include_once(dirname(__FILE__) . '/../../class/include.php');
 session_start();
 if ($_POST['action'] == 'ADDORDER') {
-    
+
     $ORDER = new Order(NULL);
     date_default_timezone_set('Asia/Colombo');
     $orderedAt = date('Y-m-d H:i:s');
@@ -17,11 +17,12 @@ if ($_POST['action'] == 'ADDORDER') {
     $ORDER->contactNo2 = $_POST['contactNo2'];
     $ORDER->orderNote = $_POST['orderNote'];
     $ORDER->amount = $_POST['amount'];
-    $ORDER->status = 1;
+    $ORDER->status = 0;
     $ORDER->paymentStatusCode = 0;
     $ORDER->deliveryStatus = 0;
 
     $result = $ORDER->create();
+
     if ($result) {
 
         $_SESSION['current_order_id'] = $result;
@@ -34,15 +35,13 @@ if ($_POST['action'] == 'ADDORDER') {
 
             $result1 = $ORDERPRODUCT->create();
         }
-        
-       $ORD = new Order($result);
-       $products = OrderProduct::getProductsByOrder($result);
-       $res = $ORD->sendOrderMail($products);
-       $res = $ORD->sendOrderMailToAdmin($products);
 
-       unset($_SESSION["shopping_cart"]);
+        $res = $ORDER->sendOrderMail($result);
+
+        unset($_SESSION["shopping_cart"]);
         $res['status'] = 'success';
         $res['order_id'] = $result;
+
         echo json_encode($res);
         exit();
     } else {
@@ -58,7 +57,7 @@ if (isset($_POST["action"]) == "ADDTOQTY") {
         $is_available = 0;
 
         foreach ($_SESSION["shopping_cart"] as $key => $values) {
-            
+
             if ($_SESSION["shopping_cart"] [$key] ['product_id'] == $_POST["product_id"]) {
                 $is_available++;
                 if (isset($_POST['quantity'])) {

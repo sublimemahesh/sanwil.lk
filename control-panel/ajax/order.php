@@ -6,7 +6,7 @@ if ($_POST['option'] == 'delivered') {
     $ORDER = new Order($_POST['id']);
 
     $result = $ORDER->markAsDelivered();
-    $ORDER->sendOrderConfirmedEmail();
+    $res = $ORDER->sendOrderConfirmedEmail();
     if ($result) {
         $data = array("status" => TRUE);
         header('Content-type: application/json');

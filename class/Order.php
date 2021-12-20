@@ -5,8 +5,7 @@
  *
  * @author U s E r ¨
  */
-class Order
-{
+class Order {
 
     public $id;
     public $orderedAt;
@@ -26,8 +25,7 @@ class Order
     public $completedAt;
     public $canceledAt;
 
-    public function __construct($id)
-    {
+    public function __construct($id) {
         if ($id) {
 
             $query = "SELECT *  FROM `orders` WHERE `id`='" . $id . "'";
@@ -58,41 +56,39 @@ class Order
         }
     }
 
-    public function create()
-    {
+    public function create() {
         $db = new Database();
         $query = "INSERT INTO `orders` ("
-            . "`ordered_at`,"
-            . "`member`,"
-            . "`address`,"
-            . "`city`,"
-            . "`contact_no_1`,"
-            . "`contact_no_2`,"
-            . "`district`,"
-            . "`amount`,"
-            . "`order_note`,"
-            . "`status`,"
-            . "`payment_status_code`,"
-            . "`delivery_status`,"
-            . "`delivered_at`,"
-            . "`completed_at`,"
-            . "`canceled_at`) VALUES  ("
-            . "'" . $this->orderedAt . "', "
-            . "'" . $this->member . "', "
-            . "'" . mysql_real_escape_string($this->address) . "', "
-            . "'" . $this->city . "', "
-            . "'" . $this->contactNo1 . "', "
-            . "'" . $this->contactNo2 . "', "
-            . "'" . $this->district . "', "
-            . "'" . $this->amount . "', "
-            . "'" . mysql_real_escape_string($this->orderNote) . "', "
-            . "'" . 0 . "', "
-            . "'" . $this->paymentStatusCode . "', "
-            . "'" . $this->deliveryStatus . "', "
-            . "'" . $this->deliveredAt . "', "
-            . "'" . $this->completedAt . "', "
-            . "'" . $this->canceledAt . "')";
-
+                . "`ordered_at`,"
+                . "`member`,"
+                . "`address`,"
+                . "`city`,"
+                . "`contact_no_1`,"
+                . "`contact_no_2`,"
+                . "`district`,"
+                . "`amount`,"
+                . "`order_note`,"
+                . "`status`,"
+                . "`payment_status_code`,"
+                . "`delivery_status`,"
+                . "`delivered_at`,"
+                . "`completed_at`,"
+                . "`canceled_at`) VALUES  ("
+                . "'" . $this->orderedAt . "', "
+                . "'" . $this->member . "', "
+                . "'" . mysql_real_escape_string($this->address) . "', "
+                . "'" . $this->city . "', "
+                . "'" . $this->contactNo1 . "', "
+                . "'" . $this->contactNo2 . "', "
+                . "'" . $this->district . "', "
+                . "'" . $this->amount . "', "
+                . "'" . mysql_real_escape_string($this->orderNote) . "', "
+                . "'" . 0 . "', "
+                . "'" . $this->paymentStatusCode . "', "
+                . "'" . $this->deliveryStatus . "', "
+                . "'" . $this->deliveredAt . "', "
+                . "'" . $this->completedAt . "', "
+                . "'" . $this->canceledAt . "')";
 
 
         $result = $db->readQuery($query);
@@ -106,8 +102,7 @@ class Order
         }
     }
 
-    public function all()
-    {
+    public function all() {
 
         $query = "SELECT * FROM `orders` ORDER BY `id` DESC";
         $db = new Database();
@@ -121,8 +116,7 @@ class Order
         return $array_res;
     }
 
-    public function getOrdersByDateRange($from, $to, $status)
-    {
+    public function getOrdersByDateRange($from, $to, $status) {
 
         $query = "SELECT * FROM `orders` WHERE `delivery_status`='" . $status . "' AND `status`='1' AND (`ordered_at` BETWEEN '" . $from . "' AND '" . $to . "' OR `ordered_at` LIKE '%" . $to . "%')";
         $db = new Database();
@@ -136,8 +130,7 @@ class Order
         return $array_res;
     }
 
-    public function getOrdersByCustomer($customer)
-    {
+    public function getOrdersByCustomer($customer) {
 
         $query = "SELECT * FROM `orders` WHERE `member`='" . $customer . "' ORDER BY `id` DESC";
         $db = new Database();
@@ -151,8 +144,7 @@ class Order
         return $array_res;
     }
 
-    public function getUnpaidOrdersByDateRange($from, $to)
-    {
+    public function getUnpaidOrdersByDateRange($from, $to) {
 
         $query = "SELECT * FROM `orders` WHERE `status`='0' AND (`ordered_at` BETWEEN '" . $from . "' AND '" . $to . "' OR `ordered_at` LIKE '%" . $to . "%') ";
         $db = new Database();
@@ -166,8 +158,7 @@ class Order
         return $array_res;
     }
 
-    public function getPaidOrders()
-    {
+    public function getPaidOrders() {
 
         $query = "SELECT * FROM `orders` WHERE `status`='1' ";
         $db = new Database();
@@ -181,12 +172,11 @@ class Order
         return $array_res;
     }
 
-    public function updateResponse($id, $status)
-    {
+    public function updateResponse($id, $status) {
 
         $query = "UPDATE `orders` SET "
-            . "`status` ='" . $status . "' "
-            . " WHERE `id` = '" . $id . "'";
+                . "`status` ='" . $status . "' "
+                . " WHERE `id` = '" . $id . "'";
         $db = new Database();
         $result = $db->readQuery($query);
 
@@ -197,8 +187,7 @@ class Order
         }
     }
 
-    public function delete()
-    {
+    public function delete() {
 
         $this->deleteOrderProducts();
 
@@ -209,8 +198,7 @@ class Order
         return $db->readQuery($query);
     }
 
-    public function deleteOrderProducts()
-    {
+    public function deleteOrderProducts() {
 
         $ORDER_PRODUCT = new OrderProduct(NULL);
 
@@ -224,8 +212,7 @@ class Order
         }
     }
 
-    public function getLastID()
-    {
+    public function getLastID() {
 
         $query = "SELECT `id` FROM `orders` ORDER BY `id` DESC LIMIT 1";
         $db = new Database();
@@ -234,29 +221,14 @@ class Order
         return $result['id'];
     }
 
-    function updatePaymentStatusCodeAndStatus()
-    {
+    function updatePaymentStatusCodeAndStatus() {
 
         $query = "UPDATE  `orders` SET "
-            . "`payment_status_code` ='" . $this->paymentStatusCode . "', "
-            . "`status_code` ='" . $this->statusCode . "', "
-            . "`status` ='" . $this->status . "' "
-            . " WHERE `id` = '" . $this->id . "'  ";
-        $db = new Database();
-        $result = $db->readQuery($query);
-
-        if ($result) {
-            return TRUE;
-        } else {
-            return FALSE;
-        }
-    }
-    function updatePaymentStatusCode()
-    {
-
-        $query = "UPDATE  `orders` SET "
-            . "`payment_status_code` ='" . $this->paymentStatusCode . "' "
-            . " WHERE `id` = '" . $this->id . "'  ";
+                . "`payment_status_code` ='" . $this->paymentStatusCode . "', "
+                . "`status_code` ='" . $this->statusCode . "', "
+                . "`status` ='" . $this->status . "' "
+                . " WHERE `id` = '" . $this->id . "'  ";
+        // dd($query);
         $db = new Database();
         $result = $db->readQuery($query);
 
@@ -267,14 +239,28 @@ class Order
         }
     }
 
-    function markAsDelivered()
-    {
+    function updatePaymentStatusCode() {
+
+        $query = "UPDATE  `orders` SET "
+                . "`payment_status_code` ='" . $this->paymentStatusCode . "' "
+                . " WHERE `id` = '" . $this->id . "'  ";
+        $db = new Database();
+        $result = $db->readQuery($query);
+
+        if ($result) {
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+    }
+
+    function markAsDelivered() {
         date_default_timezone_set('Asia/Colombo');
         $deliveredAt = date('Y-m-d H:i:s');
         $query = "UPDATE  `orders` SET "
-            . "`status` ='1', "
-            . "`delivered_at` ='" . $deliveredAt . "' "
-            . " WHERE `id` = '" . $this->id . "'  ";
+                . "`status` ='1', "
+                . "`delivered_at` ='" . $deliveredAt . "' "
+                . " WHERE `id` = '" . $this->id . "'  ";
         $db = new Database();
         $result = $db->readQuery($query);
 
@@ -285,14 +271,13 @@ class Order
         }
     }
 
-    function markAsCompleted()
-    {
+    function markAsCompleted() {
         date_default_timezone_set('Asia/Colombo');
         $completedAt = date('Y-m-d H:i:s');
         $query = "UPDATE  `orders` SET "
-            . "`status` ='2', "
-            . "`completed_at` ='" . $completedAt . "' "
-            . " WHERE `id` = '" . $this->id . "'  ";
+                . "`status` ='2', "
+                . "`completed_at` ='" . $completedAt . "' "
+                . " WHERE `id` = '" . $this->id . "'  ";
         $db = new Database();
         $result = $db->readQuery($query);
 
@@ -303,14 +288,13 @@ class Order
         }
     }
 
-    function cancelOrder()
-    {
+    function cancelOrder() {
         date_default_timezone_set('Asia/Colombo');
         $canceledAt = date('Y-m-d H:i:s');
         $query = "UPDATE  `orders` SET "
-            . "`status` ='3', "
-            . "`canceled_at` ='" . $canceledAt . "' "
-            . " WHERE `id` = '" . $this->id . "'  ";
+                . "`status` ='3', "
+                . "`canceled_at` ='" . $canceledAt . "' "
+                . " WHERE `id` = '" . $this->id . "'  ";
         $db = new Database();
         $result = $db->readQuery($query);
 
@@ -321,8 +305,7 @@ class Order
         }
     }
 
-    public function deleteOrder()
-    {
+    public function deleteOrder() {
 
         $query = 'DELETE FROM `orders` WHERE id="' . $this->id . '"';
 
@@ -330,8 +313,7 @@ class Order
         return $db->readQuery($query);
     }
 
-    public function getPaymentStatusCode($order)
-    {
+    public function getPaymentStatusCode($order) {
 
         $query = "SELECT `payment_status_code` FROM `orders` WHERE `id` = $order";
         $db = new Database();
@@ -339,8 +321,7 @@ class Order
         return $result["payment_status_code"];
     }
 
-    public function getOrdersByDeliveryStatusDescending($status)
-    {
+    public function getOrdersByDeliveryStatusDescending($status) {
 
         $query = "SELECT * FROM `orders` WHERE `delivery_status`='" . $status . "' AND `payment_status_code` != 4 AND `status`='1' ORDER BY `id` DESC ";
         $db = new Database();
@@ -354,8 +335,7 @@ class Order
         return $array_res;
     }
 
-    public function getOrdersByDeliveryStatus($status)
-    {
+    public function getOrdersByDeliveryStatus($status) {
 
         $query = "SELECT * FROM `orders` WHERE `status`='" . $status . "'";
         $db = new Database();
@@ -369,8 +349,7 @@ class Order
         return $array_res;
     }
 
-    public function getCanceledOrders()
-    {
+    public function getCanceledOrders() {
 
         $query = "SELECT * FROM `orders` WHERE `status`='3'";
         $db = new Database();
@@ -383,8 +362,8 @@ class Order
 
         return $array_res;
     }
-    public function getRefundOrders()
-    {
+
+    public function getRefundOrders() {
 
         $query = "SELECT * FROM `orders` WHERE `payment_status_code`='4'";
         $db = new Database();
@@ -398,88 +377,9 @@ class Order
         return $array_res;
     }
 
-    public function createOrder()
-    {
-
-        date_default_timezone_set('Asia/Colombo');
-        $orderedAt = date('Y-m-d H:i:s');
-
-        $query = "INSERT INTO `orders` ("
-            . "`ordered_at`,"
-            . "`member`,"
-            . "`address`,"
-            . "`city`,"
-            . "`contact_no_1`,"
-            . "`contact_no_2`,"
-            . "`district`,"
-            . "`amount`,"
-            . "`order_note`,"
-            . "`status`) VALUES  ("
-            . "'" . $orderedAt . "', "
-            . "'" . $this->member . "', "
-            . "'" . $this->address . "', "
-            . "'" . $this->city . "', "
-            . "'" . $this->contactNo1 . "', "
-            . "'" . $this->contactNo2 . "', "
-            . "'" . $this->district . "', "
-            . "'" . $this->amount . "', "
-            . "'" . $this->orderNote . "', "
-            . "'" . 1 . "')";
-
-        $db = new Database();
-        $result = $db->readQuery2($query);
-
-        if ($result) {
-            return $result;
-        } else {
-            return FALSE;
-        }
-    }
-
-    public function getOrdersByDeliveryStatusAndMember($member, $status)
-    {
-
-        $query = "SELECT * FROM `orders` WHERE `delivery_status`='" . $status . "' AND `status`='1' AND `member`='" . $member . "'";
-
-        $db = new Database();
-        $result = $db->readQuery1($query);
-        $array_res = array();
-
-        while ($row = mysqli_fetch_array($result)) {
-            array_push($array_res, $row);
-        }
-
-        return $array_res;
-    }
-
-    public function getCanceledOrdersByMember($member)
-    {
-
-        $query = "SELECT * FROM `orders` WHERE `status`='0' AND `member`='" . $member . "'";
-
-        $db = new Database();
-        $result = $db->readQuery1($query);
-        $array_res = array();
-
-        while ($row = mysqli_fetch_array($result)) {
-            array_push($array_res, $row);
-        }
-
-        return $array_res;
-    }
-
-    public function getDetailsByID($id)
-    {
-        $query = "SELECT * FROM `orders` WHERE `id` = $id";
-        $db = new Database();
-        $result = $db->readQuery1($query);
-        $result = mysqli_fetch_assoc($result);
-        return $result;
-    }
-
-    function sendOrderMail($products)
-    {
+    function sendOrderMail($order) {
         $CUSTOMER = new Customer($this->member);
+        $products = OrderProduct::getProductsByOrder($order);
         $DISTRICT = new District($this->district);
         $CITY = new City($this->city);
 
@@ -487,317 +387,284 @@ class Order
         $todayis = date("l, F j, Y, g:i a");
         $site_link = "https://" . $_SERVER['HTTP_HOST'];
 
-        $comany_name = "Ceylon Fine Spice";
-        $website_name = "www.ceylonfinespice.com";
-        $comConNumber = "+94 773 051 737";
-        $comEmail = "info@ceylonfinespice.com";
-        $comOwner = "Team Ceylon Fine Spice";
-        $reply_email_name = 'CEYLON FINE SPICE';
+        //----------------------- DISPLAY STRINGS ---------------------
+        $comany_name = "Sanwil Products";
+        $website_name = "www.sanwil.lk";
+        $comConNumber = "+94 77 991 7890";
+        $comEmail = "sanwilproducts@gmail.com";
+        $comOwner = "Sanwil Products";
+        $customer_msg = 'Hello, and thank you for your interest in ' . $comany_name . '. We have received your enquiry, and we will get back to you as soon as possible.';
 
-        $visitor_email = $CUSTOMER->email;
+
         $visitor_name = $CUSTOMER->name;
-        $webmail = "test@synotec.lk";
-        $visitorSubject = "Order Enquiry - #" . $this->id;
+        $visitor_email = $CUSTOMER->email;
+        //    $visitor_phone = $CUSTOMER->phone_number;
+        //    $message = $_POST['message'];
+        //------------------------ MAIL ESSENTIALS --------------------------------
+
+        $webmail = "testing@synotec.lk";
+        $visitorSubject = "Thank You " . $visitor_name . " - " . $comany_name;
+        $companySubject = "Order Enquiry - #" . $order;
+
+        $delivery_charge = $this->deliveryCharges;
 
         $tr = '';
         $tot = 0;
         $id = 0;
         foreach ($products as $key => $product) {
+
             $PRODUCT = new Product($product['product']);
+
+            // if ($PRODUCT->parent  != 0) {
+            //     $PARANT = new Product($PRODUCT->parent);
+            //     $name = $PARANT->name . ' - ' . $product["product_name"];
+            // } else {
+            $name = $PRODUCT->name;
+            // }
+
             $tot += $product['amount'];
             $id++;
             $tr .= '<tr>';
             $tr .= '<td>' . $id . '</td>';
-            $tr .= '<td>' . $PRODUCT->name . '</td>';
-            $tr .= '<td>' . $product['qty'] . ' ' . $PRODUCT->unit . '</td>';
+            $tr .= '<td>' . $name . '</td>';
+            $tr .= '<td>' . $product['qty'] . '</td>';
             $tr .= '<td style="text-align: right;">Rs. ' . number_format($product['amount'], 2) . '</td>';
             $tr .= '</tr>';
         }
-        // $processing_fee = ($tot + 150) * 3 / 100;
-        $grand_total = $tot + 0;
 
+        $grand_total = $tot + $delivery_charge;
+        if ($this->status == 0) {
+            $status = "Pending";
+        } elseif ($this->status == 1) {
+            $status = "Confirmed";
+        }
 
-
-
-        $html = '<html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>Synotec Email</title>
-    </head>
-    <body>
-        <table width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#f6f8fb"> 
-            <tbody>
-                <tr> 
-                    <td style="padding-top:10px;padding-bottom:30px;padding-left:16px;padding-right:16px" align="center"> 
-                        <table style="width:602px" width="602" cellspacing="0" cellpadding="0" border="0" align="center"> 
-                            <tbody>
-                                <tr> 
-                                    <td bgcolor=""> 
-                                        <table width="642" cellspacing="0" cellpadding="0" border="0"> 
-                                            <tbody> 
-                                                <tr> 
-                                                    <td style="border:1px solid #dcdee3;padding:20px;background-color:#fff;width:600px" width="600px" bgcolor="#ffffff" align="center"> 
-                                                        <table width="100%" cellspacing="0" cellpadding="0" border="0"> 
-                                                            <tbody>
-                                                                <tr><td>
-                                                                        <table width="100%" cellspacing="0" cellpadding="0" border="0">
-                                                                            <tbody>
-                                                                                <tr>
-                                                                                    <td width="100%">
-                                                                                        <table width="100%" cellspacing="0" cellpadding="0" border="0" style="margin-bottom: 25px;">
-                                                                                            <tbody>
-                                                                                                <tr>
-                                                                                                    <td valign="middle" height="46" align="right">
-                                                                                                        <table width="100%" cellspacing="0" cellpadding="0" border="0">
-                                                                                                            <tbody>
-                                                                                                                <tr>
-                                                                                                                    <td width="100%" align="center">
-                                                                                                                        <font style="font-family:Verdana,Geneva,sans-serif;color:#68696a;font-size:18px">
-                                                                                                                            <a href="' . $site_link . '" style="color:#68696a;text-decoration:none;" target="_blank" data-saferedirecturl="https://www.google.com/url?q=http://www.gallecabsandtours.com&amp;source=gmail&amp;ust=1574393192616000&amp;usg=AFQjCNGNM8_Z7ZMe7ndwFlJuHEP29nDd3Q">
-                                                                                                                                <h4>' . $website_name . '</h4>
-                                                                                                                            </a>
-                                                                                                                        </font>
-                                                                                                                    </td>
-                                                                                                                </tr>
-                                                                                                            </tbody>
-                                                                                                        </table>
-                                                                                                    </td>
-                                                                                                </tr>
-                                                                                            </tbody>
-                                                                                        </table>
-                                                                                    </td>
-                                                                                </tr>
-                                                                            </tbody>
-                                                                        </table>
-                                                                    </td>
-                                                                </tr>
-                                                            </tbody> 
-                                                        </table> 
-                                                        <table style="background-color:#f5f7fa" width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#F5F7FA"> 
-                                                            <tbody> 
-                                                                <tr> 
-                                                                    <td style="font-size:14px;color:#333;line-height:18px;font-family:Arial,Helvetica,sans-serif;padding:15px 20px 10px;font-weight: 600;" align="left"> Hi , ' . $CUSTOMER->name . ' </td> 
-                                                                </tr> 
-                                                            </tbody> 
-                                                        </table> 
-                                                        <table style="background-color:#f5f7fa" width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#F5F7FA"> 
-                                                            <tbody> 
-                                                                <tr> 
-                                                                    <td style="word-wrap:break-word;font-size:14px;color:#333;line-height:18px;font-family:Arial,Helvetica,sans-serif;padding:10px 20px" align="left"> 
-                                                                        <p>Thank you for purchasing with us and find the attached details of the purchase below. Do not be hesitate to contact us via hotline for any enquiries.</p></td> 
-                                                                </tr> 
-                                                            </tbody> 
-                                                        </table> 
-                                                    </td> 
-                                                </tr> 
-                                                <tr> 
-                                                    <td style="padding:4px 20px;width:600px;line-height:12px">&nbsp;</td> 
-                                                </tr> 
-                                                <tr> 
-                                                    <td style="padding:20px;border:1px solid #dcdee3;width:600px;background-color:#fff"> 
-                                                        <table width="100%" cellspacing="0" cellpadding="0" border="0"> 
-                                                            <tbody> 
-                                                                <tr> 
-                                                                    <td style="font-size:15px;color:#333;line-height:18px;font-family:Arial,Helvetica,sans-serif;padding:0 0 8px;font-weight: 700;" align="left"> The Details :</td>
-                                                                </tr> 
-                                                            </tbody> 
-                                                        </table> 
-                                                        <table width="100%" cellspacing="0" cellpadding="0" border="0"> 
-                                                            <tbody> 
-                                                                <tr> 
-                                                                    <ul>
-                                                                        <li>
-                                                                            <font style="font-family:Verdana,Geneva,sans-serif;color:#68696a;font-size:14px">
-                                                                                Full Name : ' . $CUSTOMER->name . '
-                                                                            </font>
-                                                                        </li>
-                                                                        <li>
-                                                                            <font style="font-family:Verdana,Geneva,sans-serif;color:#68696a;font-size:14px">
-                                                                                Email : ' . $CUSTOMER->email . '
-                                                                            </font>
-                                                                        </li>
-                                                                        <li>
-                                                                            <font style="font-family:Verdana,Geneva,sans-serif;color:#68696a;font-size:14px">
-                                                                                Contact No : ' . $this->contactNo1 . '
-                                                                            </font>
-                                                                        </li>
-                                                                        <li>
-                                                                            <font style="font-family:Verdana,Geneva,sans-serif;color:#68696a;font-size:14px">
-                                                                               Additional Contact No : ' . $this->contactNo2 . '
-                                                                            </font>
-                                                                        </li>
-                                                                        <li>
-                                                                            <font style="font-family: Verdana, Geneva, sans-serif; color:#68696a; font-size:14px; " >
-                                                                                Address : ' . $this->address . '
-                                                                            </font>
-                                                                        </li>
-                                                                        <li>
-                                                                            <font style="font-family: Verdana, Geneva, sans-serif; color:#68696a; font-size:14px; " >
-                                                                                City : ' . $CITY->name . '
-                                                                            </font>
-                                                                        </li>
-                                                                        <li>
-                                                                            <font style="font-family: Verdana, Geneva, sans-serif; color:#68696a; font-size:14px; " >
-                                                                                District : ' . $DISTRICT->name . '
-                                                                            </font>
-                                                                        </li>
-                                                                        <li>
-                                                                            <font style="font-family: Verdana, Geneva, sans-serif; color:#68696a; font-size:14px; " >
-                                                                                Ordered At : ' . $this->orderedAt . '
-                                                                            </font>
-                                                                        </li>
-                                                                        <li>
-                                                                            <font style="font-family: Verdana, Geneva, sans-serif; color:#68696a; font-size:14px; " >
-                                                                                Status : Pending
-                                                                            </font>
-                                                                        </li>
-                                                                            
-                                                                            <table width="100%" border="1" style="margin-top: 10px" cellspacing="0" cellpadding="0">
-                                                                                <thead>
-                                                                                    <tr>
-                                                                                        <th>ID</th>
-                                                                                        <th>Product</th>
-                                                                                        <th>Qty</th>
-                                                                                        <th>Amount</th>
-                                                                                    </tr>
-
-                                                                                </thead>
+        $visitor_message = '<html xmlns="http://www.w3.org/1999/xhtml">
+        <head>
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+            <title>Synotec Email</title>
+        </head>
+        <body>
+            <table width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#f6f8fb"> 
+                <tbody>
+                    <tr> 
+                        <td style="padding-top:10px;padding-bottom:30px;padding-left:16px;padding-right:16px" align="center"> 
+                            <table style="width:602px" width="602" cellspacing="0" cellpadding="0" border="0" align="center"> 
+                                <tbody>
+                                    <tr> 
+                                        <td bgcolor=""> 
+                                            <table width="642" cellspacing="0" cellpadding="0" border="0"> 
+                                                <tbody> 
+                                                    <tr> 
+                                                        <td style="border:1px solid #dcdee3;padding:20px;background-color:#fff;width:600px" width="600px" bgcolor="#ffffff" align="center"> 
+                                                            <table width="100%" cellspacing="0" cellpadding="0" border="0"> 
+                                                                <tbody>
+                                                                    <tr><td>
+                                                                            <table width="100%" cellspacing="0" cellpadding="0" border="0">
                                                                                 <tbody>
-                                                                                    ' . $tr . '
+                                                                                    <tr>
+                                                                                        <td width="100%">
+                                                                                            <table width="100%" cellspacing="0" cellpadding="0" border="0" style="margin-bottom: 25px;">
+                                                                                                <tbody>
+                                                                                                    <tr>
+                                                                                                        <td valign="middle" height="46" align="right">
+                                                                                                            <table width="100%" cellspacing="0" cellpadding="0" border="0">
+                                                                                                                <tbody>
+                                                                                                                    <tr>
+                                                                                                                        <td width="100%" align="center">
+                                                                                                                            <font style="font-family:Verdana,Geneva,sans-serif;color:#68696a;font-size:18px">
+                                                                                                                                <a href="' . $site_link . '" style="color:#68696a;text-decoration:none;" target="_blank" data-saferedirecturl="https://www.google.com/url?q=http://www.gallecabsandtours.com&amp;source=gmail&amp;ust=1574393192616000&amp;usg=AFQjCNGNM8_Z7ZMe7ndwFlJuHEP29nDd3Q">
+                                                                                                                                    <h4>' . $website_name . '</h4>
+                                                                                                                                </a>
+                                                                                                                            </font>
+                                                                                                                        </td>
+                                                                                                                    </tr>
+                                                                                                                </tbody>
+                                                                                                            </table>
+                                                                                                        </td>
+                                                                                                    </tr>
+                                                                                                </tbody>
+                                                                                            </table>
+                                                                                        </td>
+                                                                                    </tr>
                                                                                 </tbody>
-                                                                                <tfoot>
-                                                                                    <tr>
-                                                                                        <th colspan="3" style="text-align: left;">Total</th>
-                                                                                        <th style="text-align: right;">Rs. ' . number_format($tot, 2) . '</th>
-                                                                                    </tr>
-                                                                                    <tr>
-                                                                                        <th colspan="3" style="text-align: left;">Delivery Charges</th>
-                                                                                        <th style="text-align: right;">Rs. 0.00</th>
-                                                                                    </tr>
-                                                                                    <tr>
-                                                                                        <th colspan="3" style="text-align: left;">Grand Total</th>
-                                                                                        <th style="text-align: right;">Rs. ' . number_format($grand_total, 2) . '</th>
-                                                                                    </tr>
-                                                                                </tfoot>
                                                                             </table>
-                                                                    </ul>
-                                                                </tr> 
-                                                            </tbody> 
-                                                        </table> 
-                                                        <table style="background-color:#f5f7fa" width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#F5F7FA"> 
-                                                            <tbody> 
-                                                                <tr> 
-                                                                    <td style="word-wrap:break-word;font-size:14px;color:#333;line-height:10px;font-family:Arial,Helvetica,sans-serif;padding:10px 20px 10px" align="left"> <p> Cheers, </p>
-                                                                        <p> ' . $comOwner . ' </p>
-                                                                    </td> 
-                                                                </tr>
-                                                                <tr> 
-                                                                    <td style="word-wrap:break-word;font-size:14px;color:#333;line-height:18px;font-family:Arial,Helvetica,sans-serif;padding:10px 20px" align="left"> 
-                                                                        <p>* Special Note - Do not delete this e-mail, instead keep it as the invoice to submit the delivery person.</p></td> 
-                                                                </tr> 
-                                                                    
-                                                            </tbody> 
-                                                        </table> 
-                                                        <table style="background-color:#fff" width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#fff"> 
-                                                            
-                                                            <tbody>
-                                                                <tr> 
-                                                                    <td style="padding:10px 20px 7px;color:#9a9a9a;text-align:left;font-family:Arial,Helvetica,sans-serif;font-size:12px" align="left"> <p style="line-height:18px;margin:0;padding:0"> 
-                                                                        </p><p style="line-height:24px;margin:0;padding:0">' . $comany_name . '</p>
-                                                                        <p style="line-height:24px;margin:0;padding:0">Email : ' . $comEmail . ' </p> 
-                                                                        <p style="line-height:24px;margin:0;padding:0">Tel: ' . $comConNumber . '</p> </td> 
-                                                                </tr> 
-                                                            </tbody>
-                                                        </table> 
-                                                    </td> 
-                                                </tr> 
-                                            </tbody> 
-                                        </table>
-                                    </td> 
-                                </tr> 
-                                <tr> 
-                                    <td id="m_-1040695829873221998footer_content"> 
-                                        <table width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#f6f8fb"> 
-                                            <tbody>
-                                                <tr> 
-                                                    <td> 
-                                                        <table style="padding:0" width="100%" cellspacing="0" cellpadding="0" border="0" align="center"> 
-                                                            <tbody> 
-                                                                <tr> 
-                                                                    <td style="padding:0px 0 7px;color:#9a9a9a;text-align:left;font-family:Arial,Helvetica,sans-serif;font-size:12px" align="left"> <p style="line-height:18px;margin:0;padding:0">Website By : <a href="https://synotec.lk/">Synotec Holdings</a></p> </td> 
-                                                                </tr> 
-                                                                <tr></tr> 
-                                                            </tbody> 
-                                                        </table>
-                                                    </td> 
-                                                </tr> 
-                                            </tbody>
-                                        </table> 
-                                    </td> 
-                                </tr> 
-                            </tbody>
-                        </table>
-                    </td> 
-                </tr> 
-            </tbody>
-        </table>
-    </body>
-</html>';
-        $HELPER = new Helper();
-        $visitorMail = $HELPER->PHPMailer($webmail, $comany_name, $comEmail, $reply_email_name, $visitor_email, $visitor_name, $visitorSubject, $html);
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody> 
+                                                            </table> 
+                                                            <table style="background-color:#f5f7fa" width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#F5F7FA"> 
+                                                                <tbody> 
+                                                                    <tr> 
+                                                                        <td style="font-size:14px;color:#333;line-height:18px;font-family:Arial,Helvetica,sans-serif;padding:15px 20px 10px;font-weight: 600;" align="left"> Hi , ' . $CUSTOMER->name . ' </td> 
+                                                                    </tr> 
+                                                                </tbody> 
+                                                            </table> 
+                                                            <table style="background-color:#f5f7fa" width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#F5F7FA"> 
+                                                                <tbody> 
+                                                                    <tr> 
+                                                                        <td style="word-wrap:break-word;font-size:14px;color:#333;line-height:18px;font-family:Arial,Helvetica,sans-serif;padding:10px 20px" align="left"> 
+                                                                            <p>Thank you for purchasing with us and find the attached details of the purchase below. Do not be hesitate to contact us via hotline for any enquiries.</p></td> 
+                                                                    </tr> 
+                                                                </tbody> 
+                                                            </table> 
+                                                        </td> 
+                                                    </tr> 
+                                                    <tr> 
+                                                        <td style="padding:4px 20px;width:600px;line-height:12px">&nbsp;</td> 
+                                                    </tr> 
+                                                    <tr> 
+                                                        <td style="padding:20px;border:1px solid #dcdee3;width:600px;background-color:#fff"> 
+                                                            <table width="100%" cellspacing="0" cellpadding="0" border="0"> 
+                                                                <tbody> 
+                                                                    <tr> 
+                                                                        <td style="font-size:15px;color:#333;line-height:18px;font-family:Arial,Helvetica,sans-serif;padding:0 0 8px;font-weight: 700;" align="left"> The Details :</td>
+                                                                    </tr> 
+                                                                </tbody> 
+                                                            </table> 
+                                                            <table width="100%" cellspacing="0" cellpadding="0" border="0"> 
+                                                                <tbody> 
+                                                                    <tr> 
+                                                                        <ul>
+                                                                            <li>
+                                                                                <font style="font-family:Verdana,Geneva,sans-serif;color:#68696a;font-size:14px">
+                                                                                    Full Name : ' . $CUSTOMER->name . '
+                                                                                </font>
+                                                                            </li>
+                                                                            <li>
+                                                                                <font style="font-family:Verdana,Geneva,sans-serif;color:#68696a;font-size:14px">
+                                                                                    Email : ' . $CUSTOMER->email . '
+                                                                                </font>
+                                                                            </li>
+                                                                            <li>
+                                                                                <font style="font-family:Verdana,Geneva,sans-serif;color:#68696a;font-size:14px">
+                                                                                    Contact No : ' . $this->contactNo1 . '
+                                                                                </font>
+                                                                            </li>
+                                                                            <li>
+                                                                                <font style="font-family:Verdana,Geneva,sans-serif;color:#68696a;font-size:14px">
+                                                                                   Additional Contact No : ' . $this->contactNo2 . '
+                                                                                </font>
+                                                                            </li>
+                                                                            <li>
+                                                                                <font style="font-family: Verdana, Geneva, sans-serif; color:#68696a; font-size:14px; " >
+                                                                                    Address : ' . $this->address . '
+                                                                                </font>
+                                                                            </li>
+                                                                            <li>
+                                                                                <font style="font-family: Verdana, Geneva, sans-serif; color:#68696a; font-size:14px; " >
+                                                                                    City : ' . $CITY->name . '
+                                                                                </font>
+                                                                            </li>
+                                                                            <li>
+                                                                                <font style="font-family: Verdana, Geneva, sans-serif; color:#68696a; font-size:14px; " >
+                                                                                    District : ' . $DISTRICT->name . '
+                                                                                </font>
+                                                                            </li>
+                                                                            <li>
+                                                                                <font style="font-family: Verdana, Geneva, sans-serif; color:#68696a; font-size:14px; " >
+                                                                                    Ordered At : ' . $this->orderedAt . '
+                                                                                </font>
+                                                                            </li>
+                                                                            <li>
+                                                                                <font style="font-family: Verdana, Geneva, sans-serif; color:#68696a; font-size:14px; " >
+                                                                                    Status : ' . $status . '
+                                                                                </font>
+                                                                            </li>
+                                                                                
+                                                                                <table width="100%" border="1" style="margin-top: 10px" cellspacing="0" cellpadding="0">
+                                                                                    <thead>
+                                                                                        <tr>
+                                                                                            <th>ID</th>
+                                                                                            <th>Product</th>
+                                                                                            <th>Qty</th>
+                                                                                            <th>Amount</th>
+                                                                                        </tr>
+    
+                                                                                    </thead>
+                                                                                    <tbody>
+                                                                                        ' . $tr . '
+                                                                                    </tbody>
+                                                                                    <tfoot>
+                                                                                        <tr>
+                                                                                            <th colspan="3" style="text-align: left;">Total</th>
+                                                                                            <th style="text-align: right;">Rs. ' . number_format($tot, 2) . '</th>
+                                                                                        </tr>
+                                                                                        <tr>
+                                                                                            <th colspan="3" style="text-align: left;">Delivery Charges</th>
+                                                                                            <th style="text-align: right;">Rs. ' . number_format($delivery_charge, 2) . '</th>
+                                                                                        </tr>
+                                                                                        <tr>
+                                                                                            <th colspan="3" style="text-align: left;">Grand Total</th>
+                                                                                            <th style="text-align: right;">Rs. ' . number_format($grand_total, 2) . '</th>
+                                                                                        </tr>
+                                                                                    </tfoot>
+                                                                                </table>
+                                                                        </ul>
+                                                                    </tr> 
+                                                                </tbody> 
+                                                            </table> 
+                                                            <table style="background-color:#f5f7fa" width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#F5F7FA"> 
+                                                                <tbody> 
+                                                                    <tr> 
+                                                                        <td style="word-wrap:break-word;font-size:14px;color:#333;line-height:10px;font-family:Arial,Helvetica,sans-serif;padding:10px 20px 10px" align="left"> <p> Cheers, </p>
+                                                                            <p> ' . $comOwner . ' </p>
+                                                                        </td> 
+                                                                    </tr>
+                                                                    <tr> 
+                                                                        <td style="word-wrap:break-word;font-size:14px;color:#333;line-height:18px;font-family:Arial,Helvetica,sans-serif;padding:10px 20px" align="left"> 
+                                                                            <p>* Special Note - Do not delete this e-mail, instead keep it as the invoice to submit the delivery person.</p></td> 
+                                                                    </tr> 
+                                                                        
+                                                                </tbody> 
+                                                            </table> 
+                                                            <table style="background-color:#fff" width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#fff"> 
+                                                                
+                                                                <tbody>
+                                                                    <tr> 
+                                                                        <td style="padding:10px 20px 7px;color:#9a9a9a;text-align:left;font-family:Arial,Helvetica,sans-serif;font-size:12px" align="left"> <p style="line-height:18px;margin:0;padding:0"> 
+                                                                            </p><p style="line-height:24px;margin:0;padding:0">' . $comany_name . '</p>
+                                                                            <p style="line-height:24px;margin:0;padding:0">Email : ' . $comEmail . ' </p> 
+                                                                            <p style="line-height:24px;margin:0;padding:0">Tel: ' . $comConNumber . '</p> </td> 
+                                                                    </tr> 
+                                                                </tbody>
+                                                            </table> 
+                                                        </td> 
+                                                    </tr> 
+                                                </tbody> 
+                                            </table>
+                                        </td> 
+                                    </tr> 
+                                    <tr> 
+                                        <td id="m_-1040695829873221998footer_content"> 
+                                            <table width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#f6f8fb"> 
+                                                <tbody>
+                                                    <tr> 
+                                                        <td> 
+                                                            <table style="padding:0" width="100%" cellspacing="0" cellpadding="0" border="0" align="center"> 
+                                                                <tbody> 
+                                                                    <tr> 
+                                                                        <td style="padding:0px 0 7px;color:#9a9a9a;text-align:left;font-family:Arial,Helvetica,sans-serif;font-size:12px" align="left"> <p style="line-height:18px;margin:0;padding:0">Website By : <a href="https://synotec.lk/">Synotec Holdings</a></p> </td> 
+                                                                    </tr> 
+                                                                    <tr></tr> 
+                                                                </tbody> 
+                                                            </table>
+                                                        </td> 
+                                                    </tr> 
+                                                </tbody>
+                                            </table> 
+                                        </td> 
+                                    </tr> 
+                                </tbody>
+                            </table>
+                        </td> 
+                    </tr> 
+                </tbody>
+            </table>
+        </body>
+    </html>';
 
-        if ($visitorMail) {
-            $arr['status'] = "Your message has been sent successfully";
-        } else {
-            $arr['status'] = "Could not be sent your message";
-        }
-
-        return $arr;
-    }
-
-    function sendOrderMailToAdmin($products)
-    {
-
-        $CUSTOMER = new Customer($this->member);
-        $DISTRICT = new District($this->district);
-        $CITY = new City($this->city);
-
-        date_default_timezone_set('Asia/Colombo');
-        $todayis = date("l, F j, Y, g:i a");
-        $site_link = "https://" . $_SERVER['HTTP_HOST'];
-
-        $comany_name = "Ceylon Fine Spice";
-        $website_name = "www.ceylonfinespice.com";
-        $comConNumber = "+94 773 051 737";
-        $comEmail = "info@ceylonfinespice.com";
-        $comOwner = "Team Ceylon Fine Spice";
-        $reply_email_name = 'CEYLON FINE SPICE';
-
-        $visitor_email = $CUSTOMER->email;
-        $visitor_name = $CUSTOMER->name;
-        $webmail = "test@synotec.lk";
-        $visitorSubject = "Order Enquiry - #" . $this->id;
-
-        $tr = '';
-        $tot = 0;
-        $id = 0;
-        foreach ($products as $key => $product) {
-            $PRODUCT = new Product($product['product']);
-            $tot += $product['amount'];
-            $id++;
-            $tr .= '<tr>';
-            $tr .= '<td>' . $id . '</td>';
-            $tr .= '<td>' . $PRODUCT->name . '</td>';
-            $tr .= '<td>' . $product['qty'] . ' ' . $PRODUCT->unit . '</td>';
-            $tr .= '<td style="text-align: right;">Rs. ' . number_format($product['amount'], 2) . '</td>';
-            $tr .= '</tr>';
-        }
-        // $processing_fee = ($tot + 150) * 3 / 100;
-        $grand_total = $tot + 0;
-        $status = "Pending";
-
-
-        $html = '<html xmlns="http://www.w3.org/1999/xhtml">
+        $company_message = '<html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>Synotec Email</title>
@@ -910,26 +777,26 @@ class Order
                                                                             </font>
                                                                         </li>
                                                                         <li>
-                                                                            <font style="font-family: Verdana, Geneva, sans-serif; color:#68696a; font-size:14px; " >
-                                                                                City : ' . $CITY->name . '
-                                                                            </font>
-                                                                        </li>
-                                                                        <li>
-                                                                            <font style="font-family: Verdana, Geneva, sans-serif; color:#68696a; font-size:14px; " >
-                                                                                District : ' . $DISTRICT->name . '
-                                                                            </font>
-                                                                        </li>
+                                                                                <font style="font-family: Verdana, Geneva, sans-serif; color:#68696a; font-size:14px; " >
+                                                                                    City : ' . $CITY->name . '
+                                                                                </font>
+                                                                            </li>
+                                                                            <li>
+                                                                                <font style="font-family: Verdana, Geneva, sans-serif; color:#68696a; font-size:14px; " >
+                                                                                    District : ' . $DISTRICT->name . '
+                                                                                </font>
+                                                                            </li>
                                                                             
                                                                         <li>
                                                                             <font style="font-family: Verdana, Geneva, sans-serif; color:#68696a; font-size:14px; " >
                                                                                 Ordered At : ' . $this->orderedAt . '
                                                                             </font>
                                                                         </li>
-                                                                        <li>
-                                                                            <font style="font-family: Verdana, Geneva, sans-serif; color:#68696a; font-size:14px; " >
-                                                                                Status : ' . $status . '
-                                                                            </font>
-                                                                        </li>
+                                                                            <li>
+                                                                                <font style="font-family: Verdana, Geneva, sans-serif; color:#68696a; font-size:14px; " >
+                                                                                    Status : ' . $status . '
+                                                                                </font>
+                                                                            </li>
                                                                         <table width="100%" border="1" style="margin-top: 10px" cellspacing="0" cellpadding="0">
                                                                                 <thead>
                                                                                     <tr>
@@ -950,7 +817,7 @@ class Order
                                                                                     </tr>
                                                                                     <tr>
                                                                                         <th colspan="3" style="text-align: left;">Delivery Charges</th>
-                                                                                        <th style="text-align: right;">Rs. 0.00</th>
+                                                                                        <th style="text-align: right;">Rs. ' . number_format($delivery_charge, 2) . '</th>
                                                                                     </tr>
                                                                                     <tr>
                                                                                         <th colspan="3" style="text-align: left;">Grand Total</th>
@@ -996,10 +863,13 @@ class Order
         </table>
     </body>
 </html>';
-        $HELPER = new Helper();
-        $companyMail = $HELPER->PHPMailer($webmail, $visitor_name, $visitor_email, $visitor_name, $comEmail, $comany_name, $visitorSubject, $html);
 
-        if ($companyMail) {
+
+        $HELPER = new Helper();
+        $visitorMail = $HELPER->PHPMailer($webmail, $comany_name, $comEmail, $comany_name, $visitor_email, $visitor_name, $visitorSubject, $visitor_message);
+        $companyMail = $HELPER->PHPMailer($webmail, $visitor_name, $visitor_email, $visitor_name, $comEmail, $comany_name, $companySubject, $company_message);
+
+        if ($visitorMail && $companyMail) {
             $arr['status'] = "Your message has been sent successfully";
         } else {
             $arr['status'] = "Could not be sent your message";
@@ -1007,26 +877,25 @@ class Order
 
         return $arr;
     }
-    public function sendOrderConfirmedEmail()
-    {
+
+    public function sendOrderConfirmedEmail() {
 
 
         date_default_timezone_set('Asia/Colombo');
         $todayis = date("l, F j, Y, g:i a");
         $site_link = "https://" . $_SERVER['HTTP_HOST'];
 
-        $comany_name = "Ceylon Fine Spice";
-        $website_name = "www.ceylonfinespice.com";
-        $comConNumber = "+94 773 051 737";
-        $comEmail = "info@ceylonfinespice.com";
-        $comOwner = "Team Ceylon Fine Spice";
-        $reply_email_name = 'CEYLON FINE SPICE';
+        $comany_name = "Sanwil Products";
+        $website_name = "www.sanwil.lk";
+        $comConNumber = "+94 77 991 7890";
+        $comEmail = "sanwilproducts@gmail.com";
+        $comOwner = "Sanwil Products";
+        $reply_email_name = 'Sanwil Products';
         $CUSTOMER = new Customer($this->member);
         $visitor_email = $CUSTOMER->email;
         $visitor_name = $CUSTOMER->name;
-        $webmail = "test@synotec.lk";
+        $webmail = "testing@synotec.lk";
         $visitorSubject = "Order Confirmation - (#" . $this->id . ")";
-
 
 
         // Compose a simple HTML email message
@@ -1046,13 +915,14 @@ class Order
         $message .= '</body>';
         $message .= '</html>';
 
-        $HELPER = new Helper();
-        $visitorMail = $HELPER->PHPMailer($webmail, $comany_name, $comEmail, $reply_email_name, $visitor_email, $visitor_name, $visitorSubject, $message);
 
+        $HELPER = new Helper();
+        $visitorMail = $HELPER->PHPMailer($webmail, $comany_name, $comEmail, $comany_name, $visitor_email, $visitor_name, $visitorSubject, $message);
         if ($visitorMail) {
             return TRUE;
         } else {
             return FALSE;
         }
     }
+
 }
