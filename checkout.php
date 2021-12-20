@@ -18,7 +18,7 @@ if (!isset($_SESSION["shopping_cart"]) || empty($_SESSION["shopping_cart"])) {
 $CUSTOMER = new Customer($_SESSION['id']);
 $CITY = new City($CUSTOMER->city);
 $DISTRICT = new District($CUSTOMER->district);
-$delivery_charge = DefaultData::getDeliveryCharges();
+//$delivery_charge = DefaultData::getDeliveryCharges();
 ?>
 <!DOCTYPE html>
 <html lang="en">
