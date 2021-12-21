@@ -32,12 +32,12 @@ $message = $_POST['message'];
 //---------------------- SERVER WEBMAIL LOGIN ------------------------
 
 $host = "sg1-ls7.a2hosting.com";
-$username = "test@synotec.lk";
-$password = '-6gr.o+PA,]4';
+$username = "sales@sanwil.lk";
+$password = '_D4(tla14%bz';
 
 //------------------------ MAIL ESSENTIALS --------------------------------
 
-$webmail = "test@synotec.lk";
+$webmail = "sales@sanwil.lk";
 $visitorSubject = "Thank You " . $visitor_name . " - Sanwil Products";
 $companySubject = "Contact Enquiry - " . $visitor_name;
 

@@ -7,7 +7,6 @@ session_start();
 
 
 if ($_POST["action"] === "ADD") {
-
     if (isset($_SESSION["shopping_cart"])) {
 
         $is_available = 0;
@@ -63,6 +62,9 @@ if ($_POST["action"] === 'REMOVE') {
 }
 
 if ($_POST["action"] == 'EMPTY') {
-    unset($_SESSION["shopping_cart"]);
+    // unset($_SESSION["shopping_cart"]);
+    foreach ($_SESSION["shopping_cart"] as $key => $value) {
+            unset($_SESSION["shopping_cart"] [$key]);
+    }
 }
 ?> 

@@ -14,8 +14,8 @@
 class DefaultData {
 
     const Host = 'sg1-ls7.a2hosting.com';
-    const Username = 'testing@synotec.lk';
-    const Password = '~y]cu9v;~WYy';
+    const Username = 'sales@sanwil.lk';
+    const Password = '_D4(tla14%bz';
     const Port = 465;
 
 }

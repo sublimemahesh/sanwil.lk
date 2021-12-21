@@ -402,7 +402,7 @@ class Order {
         //    $message = $_POST['message'];
         //------------------------ MAIL ESSENTIALS --------------------------------
 
-        $webmail = "testing@synotec.lk";
+        $webmail = "sales@sanwil.lk";
         $visitorSubject = "Thank You " . $visitor_name . " - " . $comany_name;
         $companySubject = "Order Enquiry - #" . $order;
 
@@ -867,7 +867,7 @@ class Order {
 
         $HELPER = new Helper();
         $visitorMail = $HELPER->PHPMailer($webmail, $comany_name, $comEmail, $comany_name, $visitor_email, $visitor_name, $visitorSubject, $visitor_message);
-        $companyMail = $HELPER->PHPMailer($webmail, $visitor_name, $visitor_email, $visitor_name, $comEmail, $comany_name, $companySubject, $company_message);
+        $companyMail = $HELPER->PHPMailer($webmail, $visitor_name, $visitor_email, $visitor_name, $webmail, $comany_name, $companySubject, $company_message);
 
         if ($visitorMail && $companyMail) {
             $arr['status'] = "Your message has been sent successfully";
@@ -894,7 +894,7 @@ class Order {
         $CUSTOMER = new Customer($this->member);
         $visitor_email = $CUSTOMER->email;
         $visitor_name = $CUSTOMER->name;
-        $webmail = "testing@synotec.lk";
+        $webmail = "sales@sanwil.lk";
         $visitorSubject = "Order Confirmation - (#" . $this->id . ")";
 
 
