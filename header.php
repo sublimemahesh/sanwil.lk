@@ -4,7 +4,7 @@
         <div class="main-bar clearfix ">
             <div class="container clearfix">
                 <!-- website logo -->
-
+              
                 <!-- nav toggle button -->
                 <button class="navbar-toggler collapsed navicon justify-content-end" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                     <span></span>
@@ -14,14 +14,14 @@
                 <!-- main nav -->
                 <div class="header-nav navbar-collapse collapse justify-content-between" id="navbarNavDropdown">
                     <ul class="nav navbar-nav nav2 nav-width">
-                        <img src="images/logos/1.png"/>
+                        <a href="./"> <img src="images/logos/1.png"/></a>
 
                     </ul>
                     <ul class="nav navbar-nav nav1" style="width: 100%;">
                         <li class="active"><a href="./" class="header2-a">Home</a></li>
                         <li><a href="about-us.php" class="header2-a">About Us</a></li>
                         <li>
-                            <a href="all-products.php" class="header2-a">Product<i class="fa fa-chevron-down"></i></a>
+                            <a href="#" class="header2-a">Product<i class="fa fa-chevron-down"></i></a>
                             <ul class="sub-menu tab-content">
                                 <?php
                                 $H_PRODUCT_CATEGORIES = new ProductCategories(NULL);
@@ -56,9 +56,9 @@
                         } else {
                             ?>
                             <li><a href="login.php" class="header2-a">Oder Now</a></li>
-                            <?php
-                        }
-                        ?>
+                                <?php
+                            }
+                            ?>
 
                     </ul>
 

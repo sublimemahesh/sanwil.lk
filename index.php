@@ -56,7 +56,7 @@ if (!isset($_SESSION)) {
             </div>
             <!-- header -->
             <?php
-            include './header_2.php';
+            include './header.php';
             ?>
             <!-- header END -->
             <!-- Content -->
@@ -135,7 +135,7 @@ if (!isset($_SESSION)) {
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
+<!--                            <div class="row">
                                 <div class="col-lg-3 col-md-6 col-sm-6 col-6 m-b30">
                                     <div class="counter-style-1 text-center">
                                         <div class="counter-num text-primary">
@@ -171,7 +171,7 @@ if (!isset($_SESSION)) {
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div>-->
                         <div class="container">
                             <div class="row m-lr0 about-area1">
                                 <div class="col-lg-6 p-lr0">
@@ -197,7 +197,7 @@ if (!isset($_SESSION)) {
                                                     </div>
                                                 </div>
                                                 <p><?php echo substr($offer['short_description'], 0, 120), '...'; ?></p>
-                                                <a href="view-offer.phpid=<?php echo $offer['id']; ?>" class="btn-secondry white btnhover btn-md"><i class="fa fa-cart"></i>GET NOW</a>
+                                                <a href="view-offer.php?id=<?php echo $offer['id']; ?>" class="btn-secondry white btnhover btn-md"><i class="fa fa-cart"></i>GET NOW</a>
                                             </div>
                                         </div>
                                         <?php
