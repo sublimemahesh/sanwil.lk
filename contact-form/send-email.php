@@ -11,7 +11,7 @@ $site_link = "http://" . $_SERVER['HTTP_HOST'];
 //----------------------- DISPLAY STRINGS ---------------------
 $comany_name = "Sanwil Products";
 $website_name = "www.sanwil.lk";
-$comConNumber = "+94 77 323 7890";
+$comConNumber = "+94 77 991 7890";
 $comEmail = "sanwilproducts@gmail.com";
 $comOwner = "Sanwil Products";
 $customer_msg = 'Hello, and thank you for your interest in ' . $comany_name . '. We have received your enquiry, and we will get back to you as soon as possible.';
