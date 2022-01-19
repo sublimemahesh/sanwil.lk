@@ -84,8 +84,8 @@ if (!isset($_SESSION)) {
                             <div class="col-lg-12">
                                 <form method="POST" id="form-data">
                                     <div class="cart-content-page" id="cart-popover">
-                                        <h2 class="title-shop-page">My Cart</h2>
-
+                                        <h2 class="title-shop-page" style="float:left;">My Cart</h2>
+                                        <a href="products.php" class="btn btnhover p-btn" style="float:right;">Add To Cart<i class="fa fa-angle-double-right m-l5"></i></a>
                                         <!--Add All Data-->
                                         <div class="table-responsive">
                                             <div id="add-cart">

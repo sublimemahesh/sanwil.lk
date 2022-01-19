@@ -15808,3 +15808,6 @@ pre {
         float: left !important;
     }
 }
+.p-btn{
+    padding: 9px 12px !important;
+}
