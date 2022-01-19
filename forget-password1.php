@@ -1,12 +1,5 @@
 <?php
-include './class/include.php';
-if (!isset($_SESSION)) {
-    session_start();
-}
-
-if (isset($_GET['member'])) {
-    $return = 'member';
-}
+include_once(dirname(__FILE__) . './class/include.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -26,7 +19,7 @@ if (isset($_GET['member'])) {
         <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
         <link rel="shortcut icon" type="image/x-icon" href="images/favicon.png" />
         <!-- PAGE TITLE HERE -->
-        <title>Sanwil Products | Reset Password</title>
+        <title>Sanwil Products | Forget Password</title>
         <!-- MOBILE SPECIFIC -->
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- STYLESHEETS -->
@@ -47,7 +40,7 @@ if (isset($_GET['member'])) {
     </head>
     <body id="bg">
         <div class="page-wraper">
-            <div id="loading-area">
+<!--            <div id="loading-area">
                 <div class="ball-pulse-rise">
                     <div></div>
                     <div></div>
@@ -55,7 +48,7 @@ if (isset($_GET['member'])) {
                     <div></div>
                     <div></div>
                 </div>
-            </div>
+            </div>-->
             <!-- header -->
             <?php
             include './header.php';
@@ -84,7 +77,7 @@ if (isset($_GET['member'])) {
                     <div class="container">
                         <div class="row">
                             <div class="col-lg-12 text-center">
-                                <h2 class="m-b40 m-md-b20">Reset Password.!</h2>
+                                <h2 class="m-b40 m-md-b20">Forget Password?</h2>
                             </div>
                         </div>
 
@@ -93,22 +86,15 @@ if (isset($_GET['member'])) {
                             <div class="col-lg-12">
                                 <div class="p-a30 border-1 max-w500 m-auto radius-sm">
                                     <div class="tab-content">
-                                        <form  id="form-data" action=" " method="post" role="form"   autocomplete="off" class="tab-pane active">
-                                            <h3 class="m-b5">Please check your email.!</h3>
+                                        <form  class="tab-pane active" action="#" method="post" id="form-data">
+                                            <h3 class="m-b5"></h3>
                                             <div class="form-group">
-                                                <input type="text" name="reset_code" id="reset_code" tabindex="1" class="form-control" placeholder="Password Reset code" value="">
+                                                <input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Enter Email " value="">
                                             </div> 
                                             <div class="form-group">
-                                                <input type="password" name="password" id="password" tabindex="1" class="form-control" placeholder="New Password" value="">
-                                            </div> 
-                                            <div class="form-group">
-                                                <input type="password" name="con_password" id="con_password" tabindex="1" class="form-control" placeholder="confirm your new Password" value="">
-                                            </div> 
-
-                                            <div class="form-group">
-                                                <div class="row text-center">
+                                                <div class="row ">
                                                     <div class="col-sm-6 col-sm-offset-3">
-                                                        <input type="submit" name="submit" id="submit" tabindex="4" class="form-control btn btn-login" value="Reset">
+                                                        <input type="submit" name="submit" id="submit" tabindex="4" class="form-control btn btn-login" value="Send Email">
                                                     </div>
                                                 </div>
                                             </div> 
@@ -141,10 +127,9 @@ if (isset($_GET['member'])) {
             });	/*ready*/
         </script>
         <script src="plugins/switcher/switcher.min.js"></script><!-- CUSTOM FUCTIONS  -->
-        <script src="js/reset-password.js" type="text/javascript"></script>
         <script src="control-panel/plugins/sweetalert/sweetalert.min.js" type="text/javascript"></script>
+        <script src="js/forgot-password.js" type="text/javascript"></script>
         <script src="js/header.js" type="text/javascript"></script>
-        <script src="js/login.js" type="text/javascript"></script>
         <script src="js/add-to-cart.js" type="text/javascript"></script>
     </body>
 

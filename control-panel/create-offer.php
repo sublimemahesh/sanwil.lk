@@ -47,7 +47,7 @@ include_once(dirname(__FILE__) . '/auth.php');
                             </div>
                             <div class="body">
                                 <form class="form-horizontal"  method="post" action="post-and-get/offer.php" enctype="multipart/form-data"> 
-                                    <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+<!--                                    <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
                                         <label for="product">Product Category</label>
                                     </div>
                                     <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
@@ -68,7 +68,7 @@ include_once(dirname(__FILE__) . '/auth.php');
                                                 </select>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>-->
 
 
                                     <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7 hidden">
