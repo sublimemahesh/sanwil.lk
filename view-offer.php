@@ -169,7 +169,7 @@ $result = $date->format('D, M d, Y');
                                     </div>
                                 </div>
                                 <div class="mb-3 text-center">
-                                     <a href="products.php" class="btn btnhover p-btn">All Products<i class="fa fa-angle-double-right m-l5"></i></a>
+                                    <a href="all-products.php" class="btn btnhover p-btn">All Products<i class="fa fa-angle-double-right m-l5"></i></a>
                                 </div>
                             </aside>
                             
