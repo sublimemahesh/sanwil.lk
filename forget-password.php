@@ -1,5 +1,12 @@
 <?php
-include_once(dirname(__FILE__) . './class/include.php');
+include './class/include.php';
+if (!isset($_SESSION)) {
+    session_start();
+}
+
+if (isset($_GET['member'])) {
+    $return = 'member';
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -10,9 +17,9 @@ include_once(dirname(__FILE__) . './class/include.php');
         <meta name="keywords" content="" />
         <meta name="author" content="" />
         <meta name="robots" content="" />
-        <meta name="description" content="RestroKing - Cakery & Bakery HTML5 Template"/>
-        <meta property="og:title" content="RestroKing - Cakery & Bakery HTML5 Template"/>
-        <meta property="og:description" content="RestroKing - Cakery & Bakery HTML5 Template"/>
+        <meta name="description" content="RestroKing - Cakery & Bakery HTML5 Template" />
+        <meta property="og:title" content="RestroKing - Cakery & Bakery HTML5 Template" />
+        <meta property="og:description" content="RestroKing - Cakery & Bakery HTML5 Template" />
         <meta property="og:image" content="social-image.png" />
         <meta name="format-detection" content="telephone=no">
         <!-- FAVICONS ICON -->
@@ -30,14 +37,17 @@ include_once(dirname(__FILE__) . './class/include.php');
         <link rel="stylesheet" type="text/css" href="css/style.min.css">
         <link rel="stylesheet" type="text/css" href="css/templete.min.css">
         <link class="skin" rel="stylesheet" type="text/css" href="css/skin/skin-1.css">
-        <link href="css/login-css.css" rel="stylesheet" type="text/css"/>
-        <link href="control-panel/plugins/sweetalert/sweetalert.css" rel="stylesheet" type="text/css"/>
+        <link href="css/login-css.css" rel="stylesheet" type="text/css" />
+        <link href="control-panel/plugins/sweetalert/sweetalert.css" rel="stylesheet" type="text/css" />
+        <link href="css/modle-login.css" rel="stylesheet" type="text/css" />
+
         <!-- Google Font -->
         <style>
             @import url('https://fonts.googleapis.com/css?family=Amita:400,700|Open+Sans:300,400,600,700,800|Poppins:100,200,300,400,500,600,700,800,900|Roboto:100,300,400,500,700,900&amp;display=swap');
         </style>
 
     </head>
+
     <body id="bg">
         <div class="page-wraper">
             <div id="loading-area">
@@ -59,12 +69,12 @@ include_once(dirname(__FILE__) . './class/include.php');
                 <div class="dlab-bnr-inr overlay-black-middle" style="background-image:url(images/banner/bnr1.jpg); background-size:cover;">
                     <div class="container">
                         <div class="dlab-bnr-inr-entry">
-                            <h1 class="text-white">Register</h1>
+                            <h1 class="text-white">Forget Password</h1>
                             <!-- Breadcrumb row -->
                             <div class="breadcrumb-row">
                                 <ul class="list-inline">
                                     <li><a href="index.php"><i class="fa fa-home"></i></a></li>
-                                    <li>Register</li>
+                                    <li>Forget Password</li>
                                 </ul>
                             </div>
                             <!-- Breadcrumb row END -->
@@ -72,41 +82,38 @@ include_once(dirname(__FILE__) . './class/include.php');
                     </div>
                 </div>
                 <!-- contact area -->
-                <div class="section-full content-inner-2 shop-account">
-                    <!-- Product -->
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-12 text-center">
-                                <h2 class="m-b40 m-md-b20">Forget Password?</h2>
-                            </div>
+                 <div class="section-full content-inner shop-account">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12 text-center">
+                            <h2 class="m-b40 m-md-b20">Forget Password?</h2>
                         </div>
+                    </div>
 
-                        <div class="row">
+                    <div class="row">
 
-                            <div class="col-lg-12">
-                                <div class="p-a30 border-1 max-w500 m-auto radius-sm">
-                                    <div class="tab-content">
-                                        <form  class="tab-pane active" action="#" method="post" id="form-data">
-                                            <h3 class="m-b5"></h3>
-                                            <div class="form-group">
-                                                <input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Enter Email " value="">
-                                            </div> 
-                                            <div class="form-group">
-                                                <div class="row ">
-                                                    <div class="col-sm-6 col-sm-offset-3">
-                                                        <input type="submit" name="submit" id="submit" tabindex="4" class="form-control btn btn-login" value="Send Email">
-                                                    </div>
+                        <div class="col-lg-12">
+                            <div class="p-a30 border-1 max-w500 m-auto radius-sm">
+                                <div class="tab-content">
+                                    <form  class="tab-pane active" action="#" method="post" id="form-data">
+                                        <h3 class="m-b5"></h3>
+                                        <div class="form-group">
+                                            <input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Enter Email " value="">
+                                        </div> 
+                                        <div class="form-group">
+                                            <div class="row ">
+                                                <div class="col-sm-6 col-sm-offset-3">
+                                                    <input type="submit" name="submit" id="submit" tabindex="4" class="form-control btn btn-login" value="Send Email">
                                                 </div>
-                                            </div> 
-                                        </form>
-                                    </div>
+                                            </div>
+                                        </div> 
+                                    </form>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!-- Product END -->
                 </div>
-
+                 </div>
             </div>
             <!-- Content END-->
             <!-- Footer -->
@@ -124,13 +131,13 @@ include_once(dirname(__FILE__) . './class/include.php');
                 setCookie('logo_value', 'images/logo.png', 1);
                 setCookie('header', 'header_v1', 1);
                 setCookie('footer', 'footer_v1', 1);
-            });	/*ready*/
+            }); /*ready*/
         </script>
         <script src="plugins/switcher/switcher.min.js"></script><!-- CUSTOM FUCTIONS  -->
         <script src="control-panel/plugins/sweetalert/sweetalert.min.js" type="text/javascript"></script>
-        <script src="js/forgot-password.js" type="text/javascript"></script>
-        <script src="js/header.js" type="text/javascript"></script>
+        <script src="js/login.js" type="text/javascript"></script>
         <script src="js/add-to-cart.js" type="text/javascript"></script>
+        <script src="js/forgot-password.js" type="text/javascript"></script>
     </body>
 
 
