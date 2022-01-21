@@ -150,10 +150,6 @@ $visitor_message = '<html xmlns="http://www.w3.org/1999/xhtml">
                                                         <table style="padding:0" width="100%" cellspacing="0" cellpadding="0" border="0" align="center"> 
                                                             <tbody> 
 
-
-                                                                <tr> 
-                                                                    <td style="padding:0px 0 7px;color:#9a9a9a;text-align:left;font-family:Arial,Helvetica,sans-serif;font-size:12px" align="left"> <p style="line-height:18px;margin:0;padding:0">Website By : <a href="https://synotec.lk/">Synotec Holdings</a></p> </td> 
-                                                                </tr> 
                                                                 <tr></tr> 
                                                             </tbody> 
                                                         </table> </td> 

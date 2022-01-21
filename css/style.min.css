@@ -14569,7 +14569,7 @@ ol.commentlist li .star-rating {
     background: #1fdf61;
     background: -moz-linear-gradient(top, #a3d179 0, #88ba46 100%);
     background: -webkit-linear-gradient(top, #a3d179 0, #88ba46 100%);
-    background: linear-gradient(to bottom, #000 0, #000 100%)
+    background: linear-gradient(to bottom, #e51821 0, #e51821 100%);
 }
 
 .theme-btn:hover {
