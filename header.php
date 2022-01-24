@@ -4,7 +4,7 @@
         <div class="main-bar clearfix ">
             <div class="container clearfix">
                 <!-- website logo -->
-              
+
                 <!-- nav toggle button -->
                 <button class="navbar-toggler collapsed navicon justify-content-end" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                     <span></span>
@@ -51,11 +51,11 @@
                         <?php
                         if (isset($_SESSION['id'])) {
                             ?>
-                            <li><a href="checkout.php" class="header2-a">Oder Now</a></li>
+                            <li><a href="cart.php" class="header2-a hoder-btn">Oder Now</a></li>
                             <?php
                         } else {
                             ?>
-                            <li><a href="login.php" class="header2-a">Oder Now</a></li>
+                            <li><a href="login.php" class="header2-a hoder-btn">Oder Now</a></li>
                                 <?php
                             }
                             ?>
