@@ -1372,6 +1372,10 @@ dl dd {
     .m-md-b100 {
         margin-bottom: 100px
     }
+    .hoder-btn{
+        max-width: 162px;
+        left: 14px; 
+    }
 }
 
 @media only screen and (max-width:767px) {
@@ -14570,6 +14574,7 @@ ol.commentlist li .star-rating {
     background: -moz-linear-gradient(top, #a3d179 0, #88ba46 100%);
     background: -webkit-linear-gradient(top, #a3d179 0, #88ba46 100%);
     background: linear-gradient(to bottom, #e51821 0, #e51821 100%);
+    display: none;
 }
 
 .theme-btn:hover {
@@ -15810,4 +15815,14 @@ pre {
 }
 .p-btn{
     padding: 9px 12px !important;
+}
+.hoder-btn{
+    background: linear-gradient(to bottom, #e51821 0, #e51821 100%);
+    color: #fff !important;
+    padding: 12px 20px !important;
+    border-radius: 40px !important;
+    min-width: 50px;
+    position: relative;
+    text-align: center;
+    z-index: 9999;
 }
