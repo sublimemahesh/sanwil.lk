@@ -96,13 +96,12 @@ if (!isset($_SESSION)) {
                                                 </a>
                                             </li>
                                             <li class="icon-bx-wraper left  m-b30">
-                                                <a href="mailto:sanwilproducts@gmail.com" >
-                                                    <div class="icon-bx-xs border-1 text-primary"> <i class="ti-email icon-cell"></i> </div>
-                                                    <div class="icon-content">
-                                                        <h6 class="text-uppercase m-tb0 dlab-tilte">Email:</h6>
-                                                        <p class="contact-p">sanwilproducts@gmail.com</p>
-                                                    </div>
-                                                </a>
+                                                <div class="icon-bx-xs border-1 text-primary"> <i class="ti-email icon-cell"></i> </div>
+                                                <div class="icon-content">
+                                                    <h6 class="text-uppercase m-tb0 dlab-tilte">Email:</h6>
+                                                    <a href="mailto:sanwilproducts@gmail.com" class=""><p class="contact-p">sanwilproducts@gmail.com</p></a>
+                                                    <a href="mailto:sales@sanwil.lk" class="">  <p class="contact-p">sales@sanwil.lk</p></a>
+                                                </div>
                                             </li>
                                             <li class="icon-bx-wraper left">
                                                 <div class="icon-bx-xs border-1 text-primary"> <i class="ti-mobile icon-cell"></i></div>
