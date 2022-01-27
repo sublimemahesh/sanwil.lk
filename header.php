@@ -51,15 +51,15 @@
                         <?php
                         if (isset($_SESSION['id'])) {
                             ?>
-                            <li><a href="cart.php" class="header2-a hoder-btn">Oder Now</a></li>
+                        <li><a href="checkout.php" class="header2-a"><i class="fa fa-cart"></i>Order Now</a></li>
                             <?php
                         } else {
                             ?>
-                            <li><a href="login.php" class="header2-a hoder-btn">Oder Now</a></li>
-                                <?php
-                            }
-                            ?>
-
+                            <li><a href="login.php" class="header2-a "><i class="fa fa-cart"></i>Order Now</a></li>
+                            <?php
+                        }
+                        ?>
+                        <li><a href="cart.php" class="header2-a hoder-btn"><i class="ti-shopping-cart h-cart"></i></a></li>
                     </ul>
 
                 </div>
