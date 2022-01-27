@@ -107,7 +107,7 @@ if (!isset($_SESSION)) {
                                                 <div class="icon-bx-xs border-1 text-primary"> <i class="ti-mobile icon-cell"></i></div>
                                                 <div class="icon-content">
                                                     <h6 class="text-uppercase m-tb0 dlab-tilte">PHONE</h6>
-                                                    <a href="tel:+94773237890" class=""><p class="contact-p">+94 77 991 7890</p></a>
+                                                    <a href="tel:+94779917890" class=""><p class="contact-p">+94 77 991 7890</p></a>
                                                     <a href="tel:+94722800233" class=""><p class="contact-p">+94 72 280 0233</p></a>
                                                 </div>
                                             </li>
